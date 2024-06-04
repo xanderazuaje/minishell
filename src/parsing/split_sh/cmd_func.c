@@ -6,7 +6,7 @@
 /*   By: xander <xander@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 03:38:11 by xander            #+#    #+#             */
-/*   Updated: 2024/06/04 03:46:01 by xander           ###   ########.fr       */
+/*   Updated: 2024/06/04 04:21:51 by xander           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ void	free_cmd(t_cmdlist *list)
 	free(list);
 }
 
-//TODO: change to right error code
 void	add_node(t_cmdlist **list, char *str)
 {
 	t_cmdlist	*node;
@@ -60,7 +59,7 @@ void	add_node(t_cmdlist **list, char *str)
 	{
 		free_cmd(*list);
 		perror("error");
-		exit(127);
+		exit(ENOMEM);
 	}
 	if (!*list)
 		*list = node;
