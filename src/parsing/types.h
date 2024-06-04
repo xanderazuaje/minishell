@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: xander <xander@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/22 09:19:51 by xander            #+#    #+#             */
-/*   Updated: 2024/06/04 04:02:33 by xander           ###   ########.fr       */
+/*   Created: 2024/06/04 03:54:44 by xander            #+#    #+#             */
+/*   Updated: 2024/06/04 04:04:39 by xander           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef TYPES_H
+# define TYPES_H
 
-# include <stdlib.h>
-# include <unistd.h>
-# include "../lib/libft/libft.h"
-# include <readline/readline.h>
-# include <readline/history.h>
-# include "parsing/parser.h"
-# include "parsing/types.h"
-# include <stdlib.h>
-
+typedef struct s_cmdlist
+{
+	char				*word;
+	short				flags;
+	struct s_cmdlist	*next;
+}	t_cmdlist;
 #endif

@@ -10,7 +10,9 @@ LIBFT_DIR := $(LIB_DIR)/libft
 
 # Source files
 SRC_FILES := $(SRC_DIR)/main.c \
-	$(SRC_DIR)/parsing/split_sh.c
+	$(SRC_DIR)/parsing/split_sh/split_sh.c \
+	$(SRC_DIR)/parsing/split_sh/cmd_func.c \
+	$(SRC_DIR)/parsing/split_sh/helper_str.c
 
 # Object files
 OBJ_FILES := $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC_FILES))

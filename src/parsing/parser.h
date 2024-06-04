@@ -6,7 +6,7 @@
 /*   By: xander <xander@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 09:24:29 by xander            #+#    #+#             */
-/*   Updated: 2024/06/02 05:59:17 by xander           ###   ########.fr       */
+/*   Updated: 2024/06/04 04:04:07 by xander           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 // Created by xander on 5/22/24.
 //
 
-#ifndef MINISHELL_PARSER_H
-#define MINISHELL_PARSER_H
+#ifndef PARSER_H
+# define PARSER_H
 
-#include "../minishell.h"
-#include <stdlib.h>
+# include "../minishell.h"
+# include "split_sh/split_sh.h"
+# include "types.h"
+# include <stdlib.h>
 
 # define INIT 0
 # define ERRO 1
@@ -31,7 +33,8 @@
 # define FILE 8
 # define ENDL 9
 
-typedef enum e_states {
+typedef enum e_states
+{
 	initial = INIT,
 	error = ERRO,
 	here_doc = HDOC,
@@ -42,15 +45,6 @@ typedef enum e_states {
 	operator = OPER,
 	file = FILE,
 	end = ENDL
-} t_states;
+}	t_states;
 
-typedef struct s_cmdlist {
-	char				*word;
-	short				flags;
-	struct s_cmdlist	*next;
-} t_cmdlist;
-
-size_t	word_counter(char const *str);
-t_cmdlist *split_sh(const char *str);
-void free_cmd(t_cmdlist *list);
 #endif
