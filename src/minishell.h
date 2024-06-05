@@ -20,7 +20,6 @@
 # include <readline/history.h>
 # include "parsing/parser.h"
 # include "parsing/types.h"
-# include <stdlib.h>
 # include <errno.h>
 
 #endif

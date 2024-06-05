@@ -6,7 +6,7 @@
 /*   By: xander <xander@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 21:49:44 by xander            #+#    #+#             */
-/*   Updated: 2024/06/04 03:46:28 by xander           ###   ########.fr       */
+/*   Updated: 2024/06/05 05:28:46 by xander           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "minishell.h"
 #include <errno.h>
 
-void process_line(char **line)
+void test_splitted(char **line)
 {
 	size_t i;
 	t_cmdlist	*splitted;
@@ -40,13 +40,21 @@ void process_line(char **line)
 	exit((int) i);
 }
 
-int main()
+void process_line(char **line)
+{
+	printf("%s\n", *line);
+	exit(0);
+}
+
+int main(int argc, char **argv, char **env)
 {
 	char *line;
 	pid_t child_id;
 	int exit_status;
 
 	exit_status = 0;
+	printf("%s\n", argv[argc - 1]);
+	(void ) env;
 	while (1)
 	{
 		line = readline("Ulishell> ");
@@ -59,7 +67,7 @@ int main()
 		}
 		child_id = fork();
 		if (child_id == 0)
-			process_line(&line);
+			test_splitted(&line);
 		waitpid(child_id, &exit_status, 0);
 		printf("%i\n", WEXITSTATUS(exit_status));
 		free(line);

@@ -6,23 +6,27 @@
 /*   By: xander <xander@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 09:23:08 by xander            #+#    #+#             */
-/*   Updated: 2024/05/24 05:10:56 by xander           ###   ########.fr       */
+/*   Updated: 2024/06/04 05:04:42 by xander           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-t_states get_state(size_t i, size_t j){
-	static t_states states[ENDL + 1][ENDL + 1]  = {
-		{ERRO, ERRO, HDOC, ERRO, COMM, REDI, ERRO, ERRO, ERRO, ENDL}, // INIT 0
-		{ERRO, ERRO, ERRO, ERRO, ERRO, ERRO, ERRO, ERRO, ERRO, ERRO}, // ERRO 1
-		{ERRO, ERRO, ERRO, DELM, ERRO, ERRO, ERRO, ERRO, ERRO, ERRO }, // HDOC 2
-		{ERRO, ERRO, ERRO, ERRO, ERRO, REDI, ARGU, OPER, }// DELM 3
-		// COMM 4
-		// REDI 5
-		// ARGU 6
-		// OPER 7
-		// FILE 8
-		// ENDL 9
-	}
+t_states	get_state(t_states prev, t_states curr)
+{
+	static t_states	states[ENDL][ENDL]  = {
+			{ERRO, ERRO, HDOC, ERRO, REDI,ERRO, COMM, ERRO, ERRO, ERRO, ERRO}, // INIT 0
+			{ERRO, ERRO, ERRO, ERRO, ERRO,ERRO, ERRO, ERRO, ERRO, ERRO, ERRO}, // ERRO 1
+			{ERRO, ERRO, ERRO, DELI, ERRO,ERRO, ERRO, ERRO, ERRO, ERRO, ERRO}, // HDOC 2
+			{ERRO, ERRO, HDOC, ERRO, REDI,ERRO, ERRO, ARGU, PIPE, LOGA, LOGO}, // DELI 3
+			{ERRO, ERRO, ERRO, ERRO, ERRO,IOFL, ERRO, ERRO, ERRO, ERRO, ERRO}, // REDI 4
+			{ERRO, ERRO, HDOC, ERRO, ERRO,ERRO, ERRO, ARGU, PIPE, LOGA, LOGO}, // IOFL 5
+			{ERRO, ERRO, HDOC, ERRO, ERRO,ERRO, ERRO, ARGU, PIPE, LOGA, LOGO}, // COMM 6
+			{ERRO, ERRO, HDOC, ERRO, ERRO,ERRO, ERRO, ARGU, PIPE, LOGA, LOGO}, // ARGU 7
+			{INIT, ERRO, ERRO, ERRO, ERRO, ERRO, ERRO, ERRO, ERRO, ERRO, ERRO}, // PIPE 8
+			{INIT, ERRO, ERRO, ERRO, ERRO, ERRO, ERRO, ERRO, ERRO, ERRO, ERRO}, // LOGA 9
+			{INIT, ERRO, ERRO, ERRO, ERRO, ERRO, ERRO, ERRO, ERRO, ERRO, ERRO}, // LOGO 10
+	};
+
+	return (states[prev][curr]);
 }

@@ -6,14 +6,14 @@
 /*   By: xander <xander@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 03:38:11 by xander            #+#    #+#             */
-/*   Updated: 2024/06/04 04:21:51 by xander           ###   ########.fr       */
+/*   Updated: 2024/06/04 04:27:43 by xander           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../parser.h"
 #include "_split_sh.h"
 
-t_cmdlist	*create_cmd(char *word, short flag)
+t_cmdlist	*create_cmd(char *word)
 {
 	t_cmdlist	*node;
 
@@ -21,7 +21,7 @@ t_cmdlist	*create_cmd(char *word, short flag)
 	if (!node)
 		return (NULL);
 	node->next = NULL;
-	node->flags = flag;
+	node->flags = initial;
 	node->word = word;
 	return (node);
 }
@@ -54,7 +54,7 @@ void	add_node(t_cmdlist **list, char *str)
 {
 	t_cmdlist	*node;
 
-	node = create_cmd(str, 0);
+	node = create_cmd(str);
 	if (!node)
 	{
 		free_cmd(*list);
