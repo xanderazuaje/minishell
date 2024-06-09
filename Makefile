@@ -14,7 +14,8 @@ SRC_FILES := $(SRC_DIR)/main.c \
 	$(SRC_DIR)/parsing/split_sh/split_sh.c \
 	$(SRC_DIR)/parsing/split_sh/cmd_func.c \
 	$(SRC_DIR)/parsing/split_sh/helper_str.c \
-	$(SRC_DIR)/parsing/tokenizer/tokenizer.c
+	$(SRC_DIR)/parsing/tokenizer/tokenizer.c \
+	$(SRC_DIR)/parsing/expansor/expansor.c
 
 # Object files
 OBJ_FILES := $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC_FILES))

@@ -14,6 +14,7 @@
 #include "minishell.h"
 #include <errno.h>
 
+/*
 void test_splitted(char **line)
 {
 	size_t i;
@@ -28,6 +29,33 @@ void test_splitted(char **line)
 		exit(EXIT_FAILURE);
 	}
 	temp = splitted;
+	while (splitted)
+	{
+		printf("--------\n");
+		printf("%s\n", splitted->word);
+		splitted = splitted->next;
+		i++;
+	}
+	free_cmd(temp);
+	free(*line);
+	exit((int) i);
+}*/
+
+void test_expansor(char **line)
+{
+	size_t i;
+	t_cmdlist	*splitted;
+	t_cmdlist	*temp;
+
+	i = 0;
+	splitted = split_sh(*line);
+	if (!splitted)
+	{
+		perror("readline:");
+		exit(EXIT_FAILURE);
+	}
+	temp = splitted;
+	expand(splitted, NULL);
 	while (splitted)
 	{
 		printf("--------\n");
@@ -57,7 +85,7 @@ int main(int argc, char **argv, char **env)
 	(void ) env;
 	while (1)
 	{
-		line = readline("Ulishell> ");
+		line = readline("Santishell> ");
 		if (line)
 			add_history(line);
 		if (ft_strncmp(line, "exit", 5) == 0)
@@ -67,7 +95,7 @@ int main(int argc, char **argv, char **env)
 		}
 		child_id = fork();
 		if (child_id == 0)
-			test_splitted(&line);
+			test_expansor(&line);
 		waitpid(child_id, &exit_status, 0);
 		printf("%i\n", WEXITSTATUS(exit_status));
 		free(line);

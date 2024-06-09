@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   expansor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: xander <xander@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/22 09:19:51 by xander            #+#    #+#             */
-/*   Updated: 2024/06/06 19:48:31 by xander           ###   ########.fr       */
+/*   Created: 2024/06/06 16:04:55 by xander            #+#    #+#             */
+/*   Updated: 2024/06/06 19:47:07 by xander           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef EXPANSOR_H
+#define EXPANSOR_H
 
-# include <stdlib.h>
-# include <unistd.h>
-# include "../lib/libft/libft.h"
-# include <readline/readline.h>
-# include <readline/history.h>
-# include <errno.h>
-/* -------------* PARSING *------------------*/
-# include "parsing/parser.h"
-# include "parsing/types.h"
+# include "../../../lib/libft/libft.h"
+
+void expand(t_cmdlist *list, char **env);
+
 #endif

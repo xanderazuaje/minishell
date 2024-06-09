@@ -13,6 +13,8 @@
 #ifndef TYPES_H
 # define TYPES_H
 
+#include <stddef.h>
+
 # define INIT 0
 # define ERRO 1
 # define HDOC 2

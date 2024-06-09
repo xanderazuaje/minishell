@@ -19,6 +19,7 @@
 
 # include "../minishell.h"
 # include "split_sh/split_sh.h"
+# include "expansor/expansor.h"
 # include "types.h"
 # include <stdlib.h>
 
