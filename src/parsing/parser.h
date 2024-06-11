@@ -3,16 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xander <xander@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/22 09:24:29 by xander            #+#    #+#             */
-/*   Updated: 2024/06/04 05:08:06 by xander           ###   ########.fr       */
+/*   Created: 2024/05/22 09:24:03 by xazuaje-          #+#    #+#             */
+/*   Updated: 2024/06/10 18:54:43 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-//
-// Created by xander on 5/22/24.
-//
 
 #ifndef PARSER_H
 # define PARSER_H

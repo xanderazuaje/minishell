@@ -6,7 +6,7 @@
 /*   By: xazuaje- <xazuaje-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 19:03:55 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/01/07 16:44:35 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2024/06/09 17:21:06 by xander           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define LIBFT_H
 # include <limits.h>
 # include <stdlib.h>
+# include <stdio.h>
 # include "get-next-line/get_next_line.h"
 
 typedef struct s_list
@@ -75,4 +76,6 @@ t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 						void (*del)(void *));
 size_t				len_to_char(const char *s, int c);
 int					ft_atoi_pos(const char *str, size_t *pos);
+size_t				len_to_ptr(char *org, const char *dest);
+void				*safe_malloc(size_t size);
 #endif

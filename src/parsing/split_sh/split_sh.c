@@ -3,27 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   split_sh.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xander <xander@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/30 04:33:20 by xander            #+#    #+#             */
-/*   Updated: 2024/06/05 04:27:47 by xander           ###   ########.fr       */
+/*   Created: 2024/05/28 18:57:10 by xazuaje-          #+#    #+#             */
+/*   Updated: 2024/06/10 18:54:30 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "_split_sh.h"
-
-size_t	len_to_ptr(char *org, const char *dest)
-{
-	size_t	i;
-
-	i = 0;
-	while (org != dest)
-	{
-		org++;
-		i++;
-	}
-	return (i);
-}
 
 void	end_word_if_can(const char *str, char **cw, char *is_word)
 {

@@ -3,16 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   _split_sh.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xander <xander@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/04 03:38:11 by xander            #+#    #+#             */
-/*   Updated: 2024/06/05 04:37:58 by xander           ###   ########.fr       */
+/*   Created: 2024/06/04 03:38:11 by xazuaje-          #+#    #+#             */
+/*   Updated: 2024/06/10 18:53:43 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-//
-// Created by xander on 6/4/24.
-//
 
 #ifndef _SPLIT_SH_H
 # define _SPLIT_SH_H

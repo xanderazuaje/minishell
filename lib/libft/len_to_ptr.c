@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   len_to_ptr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xazuaje- <xazuaje-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: xander <xander@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/16 17:23:06 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/06/09 17:22:47 by xander           ###   ########.fr       */
+/*   Created: 2024/06/09 17:09:48 by xander            #+#    #+#             */
+/*   Updated: 2024/06/09 17:09:54 by xander           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
-void	*ft_calloc(size_t count, size_t size)
+size_t	len_to_ptr(char *org, const char *dest)
 {
-	void	*ptr;
+	size_t	i;
 
-	ptr = safe_malloc(count * size);
-	ft_bzero(ptr, count * size);
-	return (ptr);
+	i = 0;
+	while (org != dest)
+	{
+		org++;
+		i++;
+	}
+	return (i);
 }

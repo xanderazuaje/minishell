@@ -6,7 +6,7 @@
 /*   By: xazuaje- <xazuaje-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 17:41:56 by xazuaje-          #+#    #+#             */
-/*   Updated: 2023/09/16 21:15:33 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2024/06/09 17:22:04 by xander           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,7 @@ char	*ft_strdup(const char *s1)
 	char	*new;
 
 	len = ft_strlen(s1);
-	new = malloc(len + 1);
-	if (new == 0)
-		return (0);
+	new = safe_malloc(len + 1);
 	ft_memcpy(new, s1, len);
 	new[len] = 0;
 	return (new);

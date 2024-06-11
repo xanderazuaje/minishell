@@ -6,7 +6,7 @@
 /*   By: xazuaje- <xazuaje-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 18:58:20 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/01/15 02:19:40 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2024/06/09 17:23:14 by xander           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,7 @@ char	*ft_itoa(int n)
 		digits++;
 		n2 *= -1;
 	}
-	str = malloc(sizeof(char) * (digits + 1));
-	if (!str)
-		return (0);
+	str = safe_malloc(sizeof(char) * (digits + 1));
 	str[digits] = 0;
 	while (n2 >= 10)
 	{

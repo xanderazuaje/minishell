@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xander <xander@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/20 21:49:44 by xander            #+#    #+#             */
-/*   Updated: 2024/06/05 05:28:46 by xander           ###   ########.fr       */
+/*   Created: 2024/05/20 21:49:39 by xazuaje-          #+#    #+#             */
+/*   Updated: 2024/06/10 18:54:57 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void test_splitted(char **line)
 	exit((int) i);
 }*/
 
-void test_expansor(char **line)
+void test_expansor(char **line, char **env)
 {
 	size_t i;
 	t_cmdlist	*splitted;
@@ -55,11 +55,12 @@ void test_expansor(char **line)
 		exit(EXIT_FAILURE);
 	}
 	temp = splitted;
-	expand(splitted, NULL);
+	expand(splitted, env);
 	while (splitted)
 	{
 		printf("--------\n");
-		printf("%s\n", splitted->word);
+		if (splitted->word)
+			printf("%s\n", splitted->word);
 		splitted = splitted->next;
 		i++;
 	}
@@ -95,7 +96,7 @@ int main(int argc, char **argv, char **env)
 		}
 		child_id = fork();
 		if (child_id == 0)
-			test_expansor(&line);
+			test_expansor(&line, env);
 		waitpid(child_id, &exit_status, 0);
 		printf("%i\n", WEXITSTATUS(exit_status));
 		free(line);
