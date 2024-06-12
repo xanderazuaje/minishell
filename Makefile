@@ -15,7 +15,14 @@ SRC_FILES := $(SRC_DIR)/main.c \
 	$(SRC_DIR)/parsing/split_sh/cmd_func.c \
 	$(SRC_DIR)/parsing/split_sh/helper_str.c \
 	$(SRC_DIR)/parsing/tokenizer/tokenizer.c \
-	$(SRC_DIR)/parsing/expansor/expansor.c
+	$(SRC_DIR)/parsing/expansor/expand_str.c \
+	$(SRC_DIR)/parsing/expansor/expand_var.c \
+	$(SRC_DIR)/parsing/expansor/expansor.c \
+	$(SRC_DIR)/parsing/expansor/get_body.c \
+	$(SRC_DIR)/parsing/expansor/get_prefix.c \
+	$(SRC_DIR)/parsing/expansor/get_var_loc.c \
+	$(SRC_DIR)/parsing/expansor/get_var_val.c \
+	$(SRC_DIR)/parsing/expansor/insert.c
 
 # Object files
 OBJ_FILES := $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC_FILES))

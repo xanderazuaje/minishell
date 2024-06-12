@@ -48,6 +48,8 @@ SOURCE = ft_isalpha\
 	len_to_char\
 	len_to_ptr\
 	safe_malloc\
+	start_with\
+	varg_strjoin\
 	get-next-line/get_next_line\
 	get-next-line/get_next_line_utils\
 

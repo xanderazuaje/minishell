@@ -6,7 +6,7 @@
 /*   By: xazuaje- <xazuaje-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 19:03:55 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/06/09 17:21:06 by xander           ###   ########.fr       */
+/*   Updated: 2024/06/12 04:30:28 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include <limits.h>
 # include <stdlib.h>
 # include <stdio.h>
+# include <stdarg.h>
 # include "get-next-line/get_next_line.h"
 
 typedef struct s_list
@@ -78,4 +79,6 @@ size_t				len_to_char(const char *s, int c);
 int					ft_atoi_pos(const char *str, size_t *pos);
 size_t				len_to_ptr(char *org, const char *dest);
 void				*safe_malloc(size_t size);
+int					start_with(const char *str, const char *find);
+char				*varg_strjoin(int n, ...);
 #endif
