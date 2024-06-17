@@ -61,15 +61,27 @@ t_cmdlist	*split_sh(const char *str)
 	char		*cw;
 	char		q;
 	char		iw;
+	char		is_scaped;
 
 	l = NULL;
 	q = '\0';
 	iw = 'F';
+	is_scaped = 'F';
 	while (1)
 	{
-		if (q == '\0' && (*str == '\'' || *str == '"'))
+
+		if (*str == '\\')
+		{
+			is_scaped = 'T';
+		}
+		else if (is_scaped == 'T')
+		{
+			str++;
+			is_scaped = 'F';
+		}
+		if (q == '\0' && (*str == '\'' || *str == '"') && is_scaped == 'F')
 			q = *str;
-		else if (*str == q)
+		else if (*str == q && is_scaped == 'F')
 			q = '\0';
 		if (can_cut(str, q))
 		{

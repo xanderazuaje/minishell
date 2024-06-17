@@ -6,22 +6,32 @@
 /*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 04:54:46 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/06/12 04:41:54 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2024/06/16 03:06:33 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../types.h"
 #include "_expansor.h"
 
-void	expand(t_cmdlist *list, char **env)
+t_cmdlist *expand(char *input, char **env)
 {
-	char	*temp;
+	char	*var_expanded;
+	t_cmdlist *splitted;
+	char *temp;
+	t_cmdlist *node;
 
-	while (list)
+	var_expanded = expand_var(input, env);
+	if (!var_expanded)
+		var_expanded = ft_strdup("");
+	splitted = split_sh(var_expanded);
+	free(var_expanded);
+	node = splitted;
+	while (node)
 	{
-		temp = list->word;
-		list->word = expand_str(list->word, env);
+		temp = node->word;
+		node->word = expand_str(node->word, env);
 		free(temp);
-		list = list->next;
+		node = node->next;
 	}
+	return splitted;
 }

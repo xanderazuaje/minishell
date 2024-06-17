@@ -6,7 +6,7 @@
 /*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 09:19:40 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/06/10 18:55:02 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2024/06/12 13:27:34 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,6 @@
 /* -------------* PARSING *------------------*/
 # include "parsing/parser.h"
 # include "parsing/types.h"
+/* -------------* TESTING *------------------*/
+# include "feature_test/feature_test.h"
 #endif

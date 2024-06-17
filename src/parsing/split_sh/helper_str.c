@@ -14,7 +14,7 @@
 
 int	is_keyword(char c)
 {
-	return (c == '|' || c == '<' || c == '>' || c == '&');
+	return (c == '|' || c == '<' || c == '>');
 }
 
 void	add_keyword_node(const char *str, t_cmdlist **list)

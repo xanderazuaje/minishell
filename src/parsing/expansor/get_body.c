@@ -20,21 +20,7 @@ void	quote_err(const char *quote)
 	exit(1);
 }
 
-char	*body_concat_expand(const char *str, size_t *i, char **env, char q)
-{
-	char	*str2;
-	char	*temp;
-
-	str2 = ft_substr(str, 1, *i - 2);
-	temp = str2;
-	if (q == '"')
-		str2 = expand_var(str2, env);
-	if (str2 != temp)
-		free(temp);
-	return (str2);
-}
-
-char	*get_body(const char *str, char *quote, size_t *i, char **env)
+char	*get_body(const char *str, char *quote, size_t *i)
 {
 	char	quote_char;
 
@@ -46,7 +32,9 @@ char	*get_body(const char *str, char *quote, size_t *i, char **env)
 		(*i)++;
 	while (str[*i] && *quote)
 	{
-		if ((str[(*i)] == '\'' || str[(*i)] == '"'))
+		if (str[(*i)] == '\\')
+			(*i)++;
+		else if (str[(*i)] == quote_char)
 			*quote = '\0';
 		(*i)++;
 	}
@@ -54,7 +42,7 @@ char	*get_body(const char *str, char *quote, size_t *i, char **env)
 		quote_err(quote);
 	if (*i > 2)
 	{
-		return (body_concat_expand(str, i, env, quote_char));
+		return (ft_substr(str, 1, *i - 2));
 	}
 	return (NULL);
 }

@@ -22,9 +22,9 @@ char	*expand_str(char *str, char **env)
 	if (!*str)
 		return (NULL);
 	quote = '\0';
-	concat.prefix = get_prefix(str, &quote, &i, env);
+	concat.prefix = get_prefix(str, &quote, &i);
 	str = str + i;
-	concat.body = get_body(str, &quote, &i, env);
+	concat.body = get_body(str, &quote, &i);
 	str = str + i;
 	concat.suffix = expand_str(str, env);
 	final = varg_strjoin(3, concat.prefix, concat.body, concat.suffix);

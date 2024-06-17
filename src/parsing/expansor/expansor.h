@@ -6,7 +6,7 @@
 /*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 00:53:25 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/06/12 00:54:28 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2024/06/16 03:05:23 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,5 @@
 
 # include "../types.h"
 
-void	expand(t_cmdlist *list, char **env);
+t_cmdlist *expand(char *str, char **env);
 #endif
