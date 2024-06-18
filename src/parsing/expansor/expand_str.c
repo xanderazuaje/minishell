@@ -16,11 +16,13 @@ char	*expand_str(char *str, char **env)
 {
 	char		quote;
 	char		*final;
+	char		*temp;
 	size_t		i;
 	t_concat	concat;
 
 	if (!*str)
 		return (NULL);
+	temp = NULL;
 	quote = '\0';
 	concat.prefix = get_prefix(str, &quote, &i);
 	str = str + i;
@@ -28,6 +30,12 @@ char	*expand_str(char *str, char **env)
 	str = str + i;
 	concat.suffix = expand_str(str, env);
 	final = varg_strjoin(3, concat.prefix, concat.body, concat.suffix);
+	if (final && ft_strchr(final, '\\'))
+	{
+		temp = final;
+		final = remove_escapes(final);
+		free(temp);
+	}
 	free(concat.prefix);
 	free(concat.body);
 	free(concat.suffix);

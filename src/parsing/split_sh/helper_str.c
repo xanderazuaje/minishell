@@ -16,11 +16,3 @@ int	is_keyword(char c)
 {
 	return (c == '|' || c == '<' || c == '>');
 }
-
-void	add_keyword_node(const char *str, t_cmdlist **list)
-{
-	if (*(str + 1) == *str)
-		add_node(list, ft_substr(str, 0, 2));
-	else
-		add_node(list, ft_substr(str, 0, 1));
-}

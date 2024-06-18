@@ -6,12 +6,11 @@
 /*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 01:01:01 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/06/16 03:17:08 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2024/06/17 08:12:47 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "_expansor.h"
-#include "../types.h"
 
 void	set_it_null(char *save[2])
 {
@@ -48,7 +47,7 @@ void	get_var_loc(char *str, char *save[2])
 	{
 		save[0] = &(str[i]);
 		i++;
-		while (isalnum(str[i]))
+		while (isalnum(str[i]) || str[i] == '_')
 			i++;
 		save[1] = &(str[i]);
 	}

@@ -6,7 +6,7 @@
 /*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 03:38:11 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/06/16 21:28:44 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2024/06/17 08:24:28 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,13 @@
 # include <stdlib.h>
 # include <ctype.h>
 # include "../types.h"
+# include "../expansor/expansor.h"
 # include "../../../lib/libft/libft.h"
 
 t_cmdlist	*create_cmd(char *word);
 void		append_cmd(t_cmdlist *list, t_cmdlist *node);
 void		add_node(t_cmdlist **list, char *str);
+char		*remove_escapes(char *str);
 int			is_keyword(char c);
-void		add_keyword_node(const char *str, t_cmdlist **list);
 
 #endif

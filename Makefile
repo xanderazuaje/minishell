@@ -24,7 +24,8 @@ SRC_FILES := $(SRC_DIR)/main.c \
 	$(SRC_DIR)/parsing/expansor/get_prefix.c \
 	$(SRC_DIR)/parsing/expansor/get_var_loc.c \
 	$(SRC_DIR)/parsing/expansor/get_var_val.c \
-	$(SRC_DIR)/parsing/expansor/insert.c
+	$(SRC_DIR)/parsing/expansor/insert.c \
+	$(SRC_DIR)/parsing/expansor/remove_protection.c
 
 # Object files
 OBJ_FILES := $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC_FILES))

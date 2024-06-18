@@ -34,4 +34,5 @@ char	*get_body(const char *str, char *quote, size_t *i);
 char	*get_prefix(const char *str, char *quote, size_t *i);
 char	*concat_expand(const char *str, size_t i, char **env, char q);
 char	*expand_str(char *str, char **env);
+char	*remove_escapes(char *str);
 #endif

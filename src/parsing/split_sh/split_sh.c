@@ -6,7 +6,7 @@
 /*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 18:57:10 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/06/10 18:54:30 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2024/06/17 07:31:03 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	clip_and_add(char *cw, const char **str, t_cmdlist **l, char *iw)
 	}
 	if (is_keyword(*(*str)))
 	{
-		add_keyword_node((*str), l);
+		add_node(l, ft_substr(*str, 0, 1));
 		if (*((*str) + 1) == *(*str))
 			(*str)++;
 	}
@@ -61,27 +61,22 @@ t_cmdlist	*split_sh(const char *str)
 	char		*cw;
 	char		q;
 	char		iw;
-	char		is_scaped;
+	int		is_scaped;
 
 	l = NULL;
 	q = '\0';
 	iw = 'F';
-	is_scaped = 'F';
+	is_scaped = 0;
 	while (1)
 	{
 
-		if (*str == '\\')
-		{
-			is_scaped = 'T';
-		}
-		else if (is_scaped == 'T')
-		{
-			str++;
-			is_scaped = 'F';
-		}
-		if (q == '\0' && (*str == '\'' || *str == '"') && is_scaped == 'F')
+		if (is_scaped == 2)
+			is_scaped = 0;
+		if (*str == '\\' || is_scaped)
+			is_scaped++;
+		if (q == '\0' && (*str == '\'' || *str == '"') && is_scaped == 0)
 			q = *str;
-		else if (*str == q && is_scaped == 'F')
+		else if (*str == q)
 			q = '\0';
 		if (can_cut(str, q))
 		{
