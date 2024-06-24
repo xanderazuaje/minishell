@@ -12,7 +12,7 @@ LIBFT_DIR := $(LIB_DIR)/libft
 SRC_FILES := $(SRC_DIR)/main.c \
 	$(SRC_DIR)/feature_test/test_expansor.c \
 	$(SRC_DIR)/feature_test/test_splitted.c \
-	$(SRC_DIR)/parsing/get_states.c \
+	$(SRC_DIR)/feature_test/test_lexer.c \
 	$(SRC_DIR)/parsing/split_sh/split_sh.c \
 	$(SRC_DIR)/parsing/split_sh/cmd_func.c \
 	$(SRC_DIR)/parsing/split_sh/helper_str.c \
@@ -25,7 +25,9 @@ SRC_FILES := $(SRC_DIR)/main.c \
 	$(SRC_DIR)/parsing/expansor/get_var_loc.c \
 	$(SRC_DIR)/parsing/expansor/get_var_val.c \
 	$(SRC_DIR)/parsing/expansor/insert.c \
-	$(SRC_DIR)/parsing/expansor/remove_protection.c
+	$(SRC_DIR)/parsing/expansor/remove_protection.c \
+	$(SRC_DIR)/parsing/lexer/check_input.c \
+	$(SRC_DIR)/parsing/lexer/get_states.c
 
 # Object files
 OBJ_FILES := $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC_FILES))

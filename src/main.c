@@ -6,7 +6,7 @@
 /*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 21:49:39 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/06/16 00:12:01 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2024/06/24 16:32:55 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int main(int argc, char **argv, char **env)
 	pid_t child_id;
 	int exit_status;
 
+	(void) env;
 	exit_status = 0;
 	printf("%s\n", argv[argc - 1]);
 	(void ) env;
@@ -47,7 +48,7 @@ int main(int argc, char **argv, char **env)
 		}
 		child_id = fork();
 		if (child_id == 0)
-			test_expansor(&line, env);
+			test_lexer(line);
 		waitpid(child_id, &exit_status, 0);
 		printf("%i\n", WEXITSTATUS(exit_status));
 		free(line);

@@ -6,7 +6,7 @@
 /*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 03:54:44 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/06/19 07:29:19 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2024/06/24 16:48:12 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@
 # define ENDQ 4
 # define PIPE 5
 # define REDI 6
-# define VARS 7
-# define LAST 8
+# define LAST 7
 
 typedef enum e_states
 {
@@ -34,7 +33,6 @@ typedef enum e_states
 	end_of_quote = ENDQ,
 	pipes = PIPE,
 	redirection = REDI,
-	variables = VARS,
 	last = LAST
 
 }	t_states;
