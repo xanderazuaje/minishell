@@ -6,7 +6,7 @@
 /*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 01:01:01 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/06/17 08:12:47 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2024/06/24 06:16:14 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@ void	set_it_null(char *save[2])
 {
 	save[0] = NULL;
 	save[1] = NULL;
+}
+
+int isquote(char c)
+{
+	return (c == '"' || c == '\'');
 }
 
 void	get_var_loc(char *str, char *save[2])
@@ -28,8 +33,12 @@ void	get_var_loc(char *str, char *save[2])
 	while (str[i])
 	{
 		if (!quote || quote == '"')
-			if (str[i] == '$' && (isalnum(str[i + 1]) || str[i + 1] == '_'))
+			if (str[i] == '$' && (isalnum(str[i + 1]) || str[i + 1] == '_' || isquote(str[i + 1])))
+			{
+				if (isquote(str[i + 1]))
+					quote = str[i + 1];
 				break ;
+			}
 		if (!quote && (str[i] == '"' || str[i] == '\''))
 			quote = str[i];
 		else if (quote && (str[i] == '"' || str[i] == '\''))
@@ -50,5 +59,19 @@ void	get_var_loc(char *str, char *save[2])
 		while (isalnum(str[i]) || str[i] == '_')
 			i++;
 		save[1] = &(str[i]);
+	}
+	else if (quote)
+	{
+		if (str[i + 2] == quote && str[i + 3] == quote)
+		{
+			save[0] = &(str[i]);
+			save[1] = &(str[i + 3]);
+		}
+		else
+		{
+			save[0] = &(str[i]);
+			save[1] = &(str[i + 1]);
+		}
+
 	}
 }

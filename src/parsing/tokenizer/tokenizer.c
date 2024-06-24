@@ -19,6 +19,7 @@ void	assign_states(t_cmdlist *cmdlist, t_states state,
 	(*prev) = (*curr);
 }
 
+/*
 void	tokenizer(t_cmdlist *cmdlist)
 {
 	t_states	prev;
@@ -38,3 +39,4 @@ void	tokenizer(t_cmdlist *cmdlist)
 		cmdlist = cmdlist->next;
 	}
 }
+*/

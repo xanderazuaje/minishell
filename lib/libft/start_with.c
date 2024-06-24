@@ -6,7 +6,7 @@
 /*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 00:46:04 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/06/15 14:50:20 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2024/06/24 06:19:28 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	start_with(const char *str, const char *find)
 		str++;
 		find++;
 	}
-	if (!*find)
+	if (!*find && *str == '=')
 		return (1);
 	return (0);
 }

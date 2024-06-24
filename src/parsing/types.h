@@ -6,7 +6,7 @@
 /*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 03:54:44 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/06/10 18:54:53 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2024/06/19 07:29:19 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,30 +17,26 @@
 
 # define INIT 0
 # define ERRO 1
-# define HDOC 2
-# define DELI 3
-# define REDI 4
-# define IOFL 5
-# define COMM 6
-# define ARGU 7
-# define PIPE 8
-# define LOGA 9
-# define LOGO 10
-# define ENDL 11
+# define ANYC 2
+# define QUOT 3
+# define ENDQ 4
+# define PIPE 5
+# define REDI 6
+# define VARS 7
+# define LAST 8
 
 typedef enum e_states
 {
 	initial = INIT,
 	error = ERRO,
-	here_doc = HDOC,
-	delimiter = DELI,
+	any_character = ANYC,
+	quotes = QUOT,
+	end_of_quote = ENDQ,
+	pipes = PIPE,
 	redirection = REDI,
-	io_file = IOFL,
-	command = COMM,
-	argument = ARGU,
-	pipe_op = PIPE,
-	log_and = LOGA,
-	log_or = LOGO,
+	variables = VARS,
+	last = LAST
+
 }	t_states;
 
 typedef struct s_cmdlist

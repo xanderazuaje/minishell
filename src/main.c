@@ -14,10 +14,6 @@
 #include "minishell.h"
 #include <errno.h>
 
-/*
-}*/
-
-
 void process_line(char **line)
 {
 	(void) line;
