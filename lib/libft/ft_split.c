@@ -80,7 +80,6 @@ t_splitted	*ft_split(char const *s, char c)
 	size_t		len;
 	t_splitted	*new;
 
-	printf("%s\n", s);
 	if (!s)
 		return (NULL);
 	i = 0;

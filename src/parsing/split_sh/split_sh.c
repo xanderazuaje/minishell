@@ -37,15 +37,19 @@ void	clip_and_add(char *cw, const char **str, t_cmdlist **l, char *iw)
 	}
 	if (is_keyword(*(*str)))
 	{
-		add_node(l, ft_substr(*str, 0, 1));
 		if (*((*str) + 1) == *(*str))
+		{
+			add_node(l, ft_substr(*str, 0, 2));
 			(*str)++;
+		}
+		else
+			add_node(l, ft_substr(*str, 0, 1));
 	}
 }
 
 int	can_cut(const char *str, char quotes)
 {
-	return ((quotes == '\0' && (is_keyword(*str) || isspace(*str))) \
+	return ((quotes == '\0' && ((is_keyword(*str)) || isspace(*str))) \
 		|| *str == '\0');
 }
 

@@ -6,7 +6,7 @@
 /*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 03:38:11 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/06/10 18:54:12 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2024/06/27 18:39:56 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_cmdlist	*create_cmd(char *word)
 	if (!node)
 		return (NULL);
 	node->next = NULL;
-	node->flags = initial;
+	node->flags = init;
 	node->word = word;
 	return (node);
 }

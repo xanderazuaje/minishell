@@ -6,7 +6,7 @@
 /*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 04:54:46 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/06/16 03:06:33 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2024/06/27 20:59:31 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_cmdlist	*expand(char *input, char **env)
 		var_expanded = ft_strdup("");
 	splitted = split_sh(var_expanded);
 	free(var_expanded);
+	tokenizer(splitted);
 	node = splitted;
 	while (node)
 	{

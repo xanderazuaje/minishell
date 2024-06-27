@@ -6,7 +6,7 @@
 /*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 16:04:55 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/06/25 00:56:21 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2024/06/27 20:59:11 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "../../../lib/libft/libft.h"
 # include "../split_sh/split_sh.h"
+# include "../tokenizer/tokenizer.h"
 # include "../types.h"
 # include "../../globals/globals.h"
 # include <ctype.h>

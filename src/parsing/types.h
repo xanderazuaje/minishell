@@ -6,7 +6,7 @@
 /*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 03:54:44 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/06/24 16:48:12 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2024/06/27 22:37:06 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,24 @@ typedef enum e_states
 	last = LAST
 }	t_states;
 
+typedef enum e_flags
+{
+	init,
+	command,
+	argument,
+	pipe_flag,
+	here_document,
+	here_document_limit,
+	infile,
+	outfile,
+	append_outfile,
+	file_name,
+}	t_flags;
+
 typedef struct s_cmdlist
 {
 	char				*word;
-	t_states			flags;
+	t_flags				flags;
 	struct s_cmdlist	*next;
 }	t_cmdlist;
 #endif

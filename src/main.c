@@ -52,7 +52,9 @@ int main(int argc, char **argv, char **env)
 			continue ;
 		for (t_cmdlist *command = cmds; command != NULL ;command = command->next)
 		{
-			printf("%s\n", command->word);
+			if (command->word)
+				printf("%s\n", command->word);
+			printf("id: %d\n", command->flags);
 			printf("-------\n");
 		}
 		free_cmd(cmds);
