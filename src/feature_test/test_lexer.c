@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-void test_lexer(char *line)
+void	test_lexer(char *line)
 {
 	if (!check_input(line))
 		exit(1);

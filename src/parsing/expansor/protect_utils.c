@@ -1,35 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_var_val.c                                      :+:      :+:    :+:   */
+/*   protect_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/12 00:49:53 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/06/25 00:56:57 by xazuaje-         ###   ########.fr       */
+/*   Created: 2024/06/27 16:26:04 by xazuaje-          #+#    #+#             */
+/*   Updated: 2024/06/27 16:26:30 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "_expansor.h"
 
-char	*get_var_val(const char *str, char **env)
+int	is_protected(char c)
 {
-	char	*var;
+	return (c == '"' || c == '\'' || c == '|' || c == '&' || c == '<'
+		|| c == '>');
+}
 
-	if (!str)
-		return (NULL);
-	if (*(str + 1) == '?')
-		return (ft_itoa(prev_exit_status(0)));
-	var = NULL;
-	while (*env && !start_with(*env, str + 1))
-		env++;
-	if (!*env)
-		return (NULL);
-	var = *env;
-	while (*var != '=')
+int	has_protected(char *str)
+{
+	while (*str)
 	{
-		var++;
+		if (is_protected(*str))
+			return (1);
+		str++;
 	}
-	var++;
-	return (ft_strdup(var));
+	return (0);
+}
+
+int	count_protected(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (*str)
+	{
+		if (is_protected(*str))
+			i++;
+		str++;
+	}
+	return (i);
 }

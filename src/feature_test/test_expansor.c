@@ -12,9 +12,9 @@
 
 #include "../minishell.h"
 
-void test_expansor(char **line, char **env)
+void	test_expansor(char **line, char **env)
 {
-	size_t i;
+	size_t		i;
 	t_cmdlist	*splitted;
 	t_cmdlist	*temp;
 

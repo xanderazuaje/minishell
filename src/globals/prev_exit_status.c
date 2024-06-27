@@ -1,35 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_var_val.c                                      :+:      :+:    :+:   */
+/*   prev_exit_status.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/12 00:49:53 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/06/25 00:56:57 by xazuaje-         ###   ########.fr       */
+/*   Created: 2024/06/25 00:45:30 by xazuaje-          #+#    #+#             */
+/*   Updated: 2024/06/27 17:57:03 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "_expansor.h"
+#include "globals.h"
 
-char	*get_var_val(const char *str, char **env)
+int	prev_exit_status(int i)
 {
-	char	*var;
+	static int	pid;
+	int			temp;
 
-	if (!str)
-		return (NULL);
-	if (*(str + 1) == '?')
-		return (ft_itoa(prev_exit_status(0)));
-	var = NULL;
-	while (*env && !start_with(*env, str + 1))
-		env++;
-	if (!*env)
-		return (NULL);
-	var = *env;
-	while (*var != '=')
-	{
-		var++;
-	}
-	var++;
-	return (ft_strdup(var));
+	temp = pid;
+	pid = i;
+	return (temp);
 }

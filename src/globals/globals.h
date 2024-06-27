@@ -1,35 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_var_val.c                                      :+:      :+:    :+:   */
+/*   globals.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/12 00:49:53 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/06/25 00:56:57 by xazuaje-         ###   ########.fr       */
+/*   Created: 2024/06/25 00:46:03 by xazuaje-          #+#    #+#             */
+/*   Updated: 2024/06/27 17:53:35 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "_expansor.h"
+#ifndef GLOBALS_H
+# define GLOBALS_H
 
-char	*get_var_val(const char *str, char **env)
-{
-	char	*var;
+int	prev_exit_status(int i);
 
-	if (!str)
-		return (NULL);
-	if (*(str + 1) == '?')
-		return (ft_itoa(prev_exit_status(0)));
-	var = NULL;
-	while (*env && !start_with(*env, str + 1))
-		env++;
-	if (!*env)
-		return (NULL);
-	var = *env;
-	while (*var != '=')
-	{
-		var++;
-	}
-	var++;
-	return (ft_strdup(var));
-}
+#endif

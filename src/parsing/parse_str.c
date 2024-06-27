@@ -1,35 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_var_val.c                                      :+:      :+:    :+:   */
+/*   parse_str.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/12 00:49:53 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/06/25 00:56:57 by xazuaje-         ###   ########.fr       */
+/*   Created: 2024/06/25 00:28:44 by xazuaje-          #+#    #+#             */
+/*   Updated: 2024/06/27 16:16:18 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "_expansor.h"
+#include "parser.h"
 
-char	*get_var_val(const char *str, char **env)
+t_cmdlist	*parse_str(char *str, char **env)
 {
-	char	*var;
-
-	if (!str)
-		return (NULL);
-	if (*(str + 1) == '?')
-		return (ft_itoa(prev_exit_status(0)));
-	var = NULL;
-	while (*env && !start_with(*env, str + 1))
-		env++;
-	if (!*env)
-		return (NULL);
-	var = *env;
-	while (*var != '=')
+	if (!check_input(str))
 	{
-		var++;
+		prev_exit_status(2);
+		return (NULL);
 	}
-	var++;
-	return (ft_strdup(var));
+	return (expand(str, env));
 }

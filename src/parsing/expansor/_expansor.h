@@ -6,7 +6,7 @@
 /*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 16:04:55 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/06/16 03:07:21 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2024/06/25 00:56:21 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "../../../lib/libft/libft.h"
 # include "../split_sh/split_sh.h"
 # include "../types.h"
+# include "../../globals/globals.h"
 # include <ctype.h>
 # include <dirent.h>
 
@@ -35,4 +36,7 @@ char	*get_prefix(const char *str, char *quote, size_t *i);
 char	*concat_expand(const char *str, size_t i, char **env, char q);
 char	*expand_str(char *str, char **env);
 char	*remove_escapes(char *str);
+int		count_protected(char *str);
+int		has_protected(char *str);
+int		is_protected(char c);
 #endif

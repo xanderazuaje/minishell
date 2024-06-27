@@ -6,7 +6,7 @@
 /*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 18:57:10 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/06/17 07:31:03 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2024/06/27 17:52:32 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,19 @@ int	can_cut(const char *str, char quotes)
 		|| *str == '\0');
 }
 
+char	check_quotes(const char *str, char q, int is_escaped)
+{
+	if (is_escaped == 2)
+		is_escaped = 0;
+	if (*str == '\\' || is_escaped)
+		is_escaped++;
+	if (q == '\0' && (*str == '\'' || *str == '"') && is_escaped == 0)
+		q = *str;
+	else if (*str == q)
+		q = '\0';
+	return (q);
+}
+
 /*
  * cw: current position for the word
  * str: string:37
@@ -61,23 +74,15 @@ t_cmdlist	*split_sh(const char *str)
 	char		*cw;
 	char		q;
 	char		iw;
-	int		is_scaped;
+	int			is_escaped;
 
 	l = NULL;
 	q = '\0';
 	iw = 'F';
-	is_scaped = 0;
+	is_escaped = 0;
 	while (1)
 	{
-
-		if (is_scaped == 2)
-			is_scaped = 0;
-		if (*str == '\\' || is_scaped)
-			is_scaped++;
-		if (q == '\0' && (*str == '\'' || *str == '"') && is_scaped == 0)
-			q = *str;
-		else if (*str == q)
-			q = '\0';
+		q = check_quotes(str, q, is_escaped);
 		if (can_cut(str, q))
 		{
 			clip_and_add(cw, &str, &l, &iw);

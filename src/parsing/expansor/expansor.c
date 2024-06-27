@@ -13,12 +13,12 @@
 #include "../types.h"
 #include "_expansor.h"
 
-t_cmdlist *expand(char *input, char **env)
+t_cmdlist	*expand(char *input, char **env)
 {
-	char	*var_expanded;
-	t_cmdlist *splitted;
-	char *temp;
-	t_cmdlist *node;
+	char		*var_expanded;
+	t_cmdlist	*splitted;
+	char		*temp;
+	t_cmdlist	*node;
 
 	var_expanded = expand_var(input, env);
 	if (!var_expanded)
@@ -33,5 +33,5 @@ t_cmdlist *expand(char *input, char **env)
 		free(temp);
 		node = node->next;
 	}
-	return splitted;
+	return (splitted);
 }

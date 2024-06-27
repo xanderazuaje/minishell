@@ -12,6 +12,14 @@
 
 #include "_expansor.h"
 
+char	*update_final(char *final, char *temp)
+{
+	temp = final;
+	final = remove_escapes(final);
+	free(temp);
+	return (final);
+}
+
 char	*expand_str(char *str, char **env)
 {
 	char		quote;
@@ -31,11 +39,7 @@ char	*expand_str(char *str, char **env)
 	concat.suffix = expand_str(str, env);
 	final = varg_strjoin(3, concat.prefix, concat.body, concat.suffix);
 	if (final && ft_strchr(final, '\\'))
-	{
-		temp = final;
-		final = remove_escapes(final);
-		free(temp);
-	}
+		final = update_final(final, temp);
 	free(concat.prefix);
 	free(concat.body);
 	free(concat.suffix);

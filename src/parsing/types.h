@@ -34,7 +34,6 @@ typedef enum e_states
 	pipes = PIPE,
 	redirection = REDI,
 	last = LAST
-
 }	t_states;
 
 typedef struct s_cmdlist
