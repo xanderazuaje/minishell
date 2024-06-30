@@ -6,7 +6,7 @@
 /*   By: xazuaje- <xazuaje-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 19:03:55 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/06/12 04:30:28 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2024/06/27 23:52:39 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,5 @@ size_t				len_to_ptr(char *org, const char *dest);
 void				*safe_malloc(size_t size);
 int					start_with(const char *str, const char *find);
 char				*varg_strjoin(int n, ...);
+void				varg_set_null(int n, ...);
 #endif

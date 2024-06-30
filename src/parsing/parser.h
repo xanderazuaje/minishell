@@ -16,7 +16,7 @@
 # include "split_sh/split_sh.h"
 # include "expansor/expansor.h"
 # include "lexer/lexer.h"
-# include "types.h"
+# include "../types.h"
 # include <stdlib.h>
 
 t_cmdlist	*parse_str(char *str, char **env);

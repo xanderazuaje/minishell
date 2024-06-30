@@ -13,7 +13,7 @@
 #ifndef SPLIT_SH_H
 # define SPLIT_SH_H
 
-# include "../types.h"
+# include "../../types.h"
 
 t_cmdlist	*split_sh(const char *str);
 void		free_cmd(t_cmdlist *list);

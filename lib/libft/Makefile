@@ -50,6 +50,7 @@ SOURCE = ft_isalpha\
 	safe_malloc\
 	start_with\
 	varg_strjoin\
+	varg_set_null\
 	get-next-line/get_next_line\
 	get-next-line/get_next_line_utils\
 

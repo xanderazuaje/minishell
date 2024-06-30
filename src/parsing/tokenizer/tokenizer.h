@@ -13,7 +13,7 @@
 #ifndef TOKENIZER_H
 # define TOKENIZER_H
 
-# include "../types.h"
+# include "../../types.h"
 # include "../parser.h"
 # include "../../../lib/libft/libft.h"
 

@@ -15,7 +15,7 @@
 
 # include <stdlib.h>
 # include <ctype.h>
-# include "../types.h"
+# include "../../types.h"
 # include "../expansor/expansor.h"
 # include "../../../lib/libft/libft.h"
 

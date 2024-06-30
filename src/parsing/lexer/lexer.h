@@ -13,7 +13,7 @@
 #ifndef LEXER_H
 # define LEXER_H
 
-# include "../types.h"
+# include "../../types.h"
 # include <unistd.h>
 
 t_states	get_state(t_states prev, t_states curr);

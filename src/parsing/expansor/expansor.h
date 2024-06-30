@@ -13,7 +13,7 @@
 #ifndef EXPANSOR_H
 # define EXPANSOR_H
 
-# include "../types.h"
+# include "../../types.h"
 
 t_cmdlist	*expand(char *str, char **env);
 #endif

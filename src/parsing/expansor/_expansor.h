@@ -16,7 +16,7 @@
 # include "../../../lib/libft/libft.h"
 # include "../split_sh/split_sh.h"
 # include "../tokenizer/tokenizer.h"
-# include "../types.h"
+# include "../../types.h"
 # include "../../globals/globals.h"
 # include <ctype.h>
 # include <dirent.h>
@@ -35,7 +35,7 @@ char	*expand_var(char *str, char **env);
 char	*get_body(const char *str, char *quote, size_t *i);
 char	*get_prefix(const char *str, char *quote, size_t *i);
 char	*concat_expand(const char *str, size_t i, char **env, char q);
-char	*expand_str(char *str, char **env);
+char	*expand_quotes(char *str, char **env);
 char	*remove_escapes(char *str);
 int		count_protected(char *str);
 int		has_protected(char *str);

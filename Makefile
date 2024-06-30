@@ -10,6 +10,7 @@ LIBFT_DIR := $(LIB_DIR)/libft
 
 # Source files
 SRC_FILES := $(SRC_DIR)/main.c \
+	$(SRC_DIR)/executor/executor.c \
 	$(SRC_DIR)/feature_test/test_expansor.c \
 	$(SRC_DIR)/feature_test/test_splitted.c \
 	$(SRC_DIR)/feature_test/test_lexer.c \
@@ -19,7 +20,7 @@ SRC_FILES := $(SRC_DIR)/main.c \
 	$(SRC_DIR)/parsing/split_sh/cmd_func.c \
 	$(SRC_DIR)/parsing/split_sh/helper_str.c \
 	$(SRC_DIR)/parsing/tokenizer/tokenizer.c \
-	$(SRC_DIR)/parsing/expansor/expand_str.c \
+	$(SRC_DIR)/parsing/expansor/expand_quotes.c \
 	$(SRC_DIR)/parsing/expansor/expand_var.c \
 	$(SRC_DIR)/parsing/expansor/expansor.c \
 	$(SRC_DIR)/parsing/expansor/get_body.c \

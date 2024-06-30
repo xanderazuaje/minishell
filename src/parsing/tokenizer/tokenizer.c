@@ -29,7 +29,7 @@ void	get_flag_state(const t_cmdlist *cmdlist, t_flags *prev, t_flags *curr)
 		*curr = infile;
 	else if (ft_strncmp(cmdlist->word, "<<", ft_strlen(cmdlist->word)) == 0)
 		*curr = here_document;
-	else if ((*prev) == command || (*prev) == argument)
+	else if ((*prev) == command || (*prev) == argument || *prev == file_name)
 		*curr = argument;
 	else if ((*prev) == init || (*prev) == pipe_flag)
 		*curr = command;

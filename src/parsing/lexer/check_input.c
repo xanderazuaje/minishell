@@ -6,7 +6,7 @@
 /*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 15:21:38 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/06/27 17:50:10 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2024/06/30 20:43:55 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,10 @@ int	check_input(char *str)
 		curr = get_state(prev, curr);
 		if (curr == error)
 		{
-			syntax_error(*str);
+			if (prev == quotes)
+				write(2, "syntax error: unclosed quote\n", 30);
+			else
+				syntax_error(*str);
 			return (0);
 		}
 		if (curr == last)
