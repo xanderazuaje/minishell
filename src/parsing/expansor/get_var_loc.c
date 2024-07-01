@@ -6,11 +6,30 @@
 /*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 01:01:01 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/06/27 17:38:26 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2024/07/02 01:20:53 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "_expansor.h"
+
+short	skip_here_doc(const char *str, size_t *p)
+{
+	size_t	i;
+
+	i = *p;
+	if (str[i] == '<' && str[i + 1] == '<')
+	{
+		i += 2;
+		while (isspace(str[i]))
+			i++;
+		while (str[i] && !is_keyword(str[i]) && !isspace(str[i]))
+			i++;
+	}
+	*p = i;
+	if (!str[i])
+		return (-1);
+	return (0);
+}
 
 int	isquote(char c)
 {
@@ -22,44 +41,6 @@ int	is_valid_varname(char c)
 	return (isalnum(c) || c == '_' || isquote(c) || c == '?');
 }
 
-void	limit_quote(char *str, char *save[2], size_t i, char quote)
-{
-	if (str[i + 2] == quote && str[i + 3] == quote)
-	{
-		save[0] = &(str[i]);
-		save[1] = &(str[i + 3]);
-	}
-	else
-	{
-		save[0] = &(str[i]);
-		save[1] = &(str[i + 1]);
-	}
-}
-
-void	set_limits(char *str, char *save[2], size_t i, char quote)
-{
-	if (!str[i])
-	{
-		save[0] = NULL;
-		save[1] = NULL;
-	}
-	else if (isdigit(str[i + 1]) || str[i + 1] == '?')
-	{
-		save[0] = &(str[i]);
-		save[1] = &(str[i + 2]);
-	}
-	else if (isalpha(str[i + 1]) || str[i + 1] == '_')
-	{
-		save[0] = &(str[i]);
-		i++;
-		while (isalnum(str[i]) || str[i] == '_')
-			i++;
-		save[1] = &(str[i]);
-	}
-	else if (quote)
-		limit_quote(str, save, i, quote);
-}
-
 void	get_var_loc(char *str, char *save[2])
 {
 	size_t	i;
@@ -69,6 +50,8 @@ void	get_var_loc(char *str, char *save[2])
 	quote = '\0';
 	while (str[i])
 	{
+		if (skip_here_doc(str, &i) == -1)
+			break ;
 		if (!quote || quote == '"')
 		{
 			if (str[i] == '$' && is_valid_varname(str[i + 1]))

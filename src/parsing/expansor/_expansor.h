@@ -6,7 +6,7 @@
 /*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 16:04:55 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/06/27 20:59:11 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2024/07/02 01:19:32 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,5 @@ char	*remove_escapes(char *str);
 int		count_protected(char *str);
 int		has_protected(char *str);
 int		is_protected(char c);
+void	set_limits(char *str, char *save[2], size_t i, char quote);
 #endif

@@ -30,6 +30,7 @@ SRC_FILES := $(SRC_DIR)/main.c \
 	$(SRC_DIR)/parsing/expansor/insert.c \
 	$(SRC_DIR)/parsing/expansor/protect_utils.c \
 	$(SRC_DIR)/parsing/expansor/remove_protection.c \
+	$(SRC_DIR)/parsing/expansor/set_limits.c \
 	$(SRC_DIR)/parsing/lexer/check_input.c \
 	$(SRC_DIR)/parsing/lexer/get_states.c
 
