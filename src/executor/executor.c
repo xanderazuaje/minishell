@@ -6,7 +6,7 @@
 /*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 23:27:02 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/06/28 02:14:45 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2024/07/02 01:46:56 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	open_files(t_cmdlist *list, int *in, int *out)
 			while (1)
 			{
 				line = readline(">");
-				if (ft_strncmp(limit, line, ft_strlen(limit)) != 0)
+				if (ft_strncmp(limit, line, ft_strlen(limit)) == 0)
 				{
 					free(line);
 					break;
@@ -87,7 +87,11 @@ void	open_files(t_cmdlist *list, int *in, int *out)
 			}
 			free(limit);
 			if (dup2(hdoc_pipes[RD_PIPE], STDIN_FILENO) == -1)
+			{
+				close(hdoc_pipes[RD_PIPE]);
 				perror("here document");
+			}
+			close(here_document);
 		}
 		else if (list->flags == outfile)
 		{
@@ -111,9 +115,9 @@ void	open_files(t_cmdlist *list, int *in, int *out)
 
 void	executor(t_cmdlist *list)
 {
-	char **arg_list;
-	char *cmd;
-	int fd[2];
+	char	**arg_list;
+	char	*cmd;
+	int		fd[2];
 
 	varg_set_null(2, &arg_list, &cmd);
 	open_files(list, &fd[0], &fd[1]);
