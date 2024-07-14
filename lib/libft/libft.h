@@ -6,7 +6,7 @@
 /*   By: xazuaje- <xazuaje-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 19:03:55 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/06/27 23:52:39 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2024/07/13 02:39:32 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int					ft_strncmp(const char *s1, const char *s2, size_t n);
 void				*ft_memchr(const void *s, int c, size_t n);
 int					ft_memcmp(const void *s1, const void *s2, size_t n);
 char				*ft_strnstr(const char *haystack, const char *needle,
-						size_t len);
+					size_t len);
 int					ft_atoi(const char *str);
 void				*ft_calloc(size_t count, size_t size);
 char				*ft_strdup(const char *s1);
@@ -74,10 +74,11 @@ void				ft_lstdelone(t_list *lst, void (*del)(void *));
 void				ft_lstclear(t_list **lst, void (*del)(void *));
 void				ft_lstiter(t_list *lst, void (*f)(void *));
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
-						void (*del)(void *));
+					void (*del)(void *));
 size_t				len_to_char(const char *s, int c);
 int					ft_atoi_pos(const char *str, size_t *pos);
 size_t				len_to_ptr(char *org, const char *dest);
+void				free_splitted(t_splitted **s);
 void				*safe_malloc(size_t size);
 int					start_with(const char *str, const char *find);
 char				*varg_strjoin(int n, ...);

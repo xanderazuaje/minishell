@@ -6,7 +6,7 @@
 /*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 01:04:10 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/06/27 16:24:54 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2024/07/09 18:09:06 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char	*insert_var(char *const *local, char *last, char *var_val)
 	return (last);
 }
 
-char	*expand_var(char *str, char **env)
+char	*expand_var(char *str, char **env, int exit_status)
 {
 	char	*local[2];
 	char	*last;
@@ -74,7 +74,7 @@ char	*expand_var(char *str, char **env)
 			break ;
 		var_name = ft_substr(local[0], 0, len_to_ptr(local[0], local[1]));
 		temp = var_name;
-		var_val = get_var_val(var_name, env);
+		var_val = get_var_val(var_name, env, exit_status);
 		free(temp);
 		if (var_val && has_protected(var_val))
 			var_val = protect_char(var_val);

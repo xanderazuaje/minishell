@@ -6,14 +6,14 @@
 /*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 04:54:46 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/06/30 21:05:13 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2024/07/10 00:37:15 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../types.h"
 #include "_expansor.h"
 
-int	add_expanded_quotes(char **env, t_cmdlist *node, int hdoc)
+int	add_expanded_quotes(t_cmdlist *node, int hdoc)
 {
 	char	*temp;
 
@@ -22,7 +22,7 @@ int	add_expanded_quotes(char **env, t_cmdlist *node, int hdoc)
 		hdoc = 1;
 	if (!hdoc)
 	{
-		node->word = expand_quotes(node->word, env);
+		node->word = expand_quotes(node->word);
 		free(temp);
 		hdoc = 0;
 	}
@@ -36,7 +36,7 @@ t_cmdlist	*expand(char *input, char **env)
 	t_cmdlist	*node;
 	int			hdoc;
 
-	var_expanded = expand_var(input, env);
+	var_expanded = expand_var(input, env, prev_exit_status(0));
 	if (!var_expanded)
 		var_expanded = ft_strdup("");
 	splitted = split_sh(var_expanded);
@@ -46,7 +46,7 @@ t_cmdlist	*expand(char *input, char **env)
 	hdoc = 0;
 	while (node)
 	{
-		hdoc = add_expanded_quotes(env, node, hdoc);
+		hdoc = add_expanded_quotes(node, hdoc);
 		node = node->next;
 	}
 	return (splitted);

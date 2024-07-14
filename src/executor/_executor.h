@@ -6,7 +6,7 @@
 /*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 23:48:35 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/07/02 01:45:29 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2024/07/13 17:00:16 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,12 @@
 # include <fcntl.h>
 # include "../minishell.h"
 
-void executor(t_cmdlist *list);
+void    executor(t_cmdlist *list, char **env);
+char	*expand_hdoc(char *str, char **env);
+int	    count_processes(const t_cmdlist *list);
+int	    count_args(const t_cmdlist *list);
+void	here_doc(t_cmdlist *list, char **env, int pipe_fd[2], char **line);
+void	assign_hdocs(t_cmdlist *list, int *hdoc_pipes, char **env);
+char	*expand_path(const char *program, char **env);
 
 #endif

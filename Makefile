@@ -10,7 +10,12 @@ LIBFT_DIR := $(LIB_DIR)/libft
 
 # Source files
 SRC_FILES := $(SRC_DIR)/main.c \
+	$(SRC_DIR)/executor/assign_hdocs.c \
+	$(SRC_DIR)/executor/counters.c \
 	$(SRC_DIR)/executor/executor.c \
+	$(SRC_DIR)/executor/expand_hdoc.c \
+	$(SRC_DIR)/executor/expand_path.c \
+	$(SRC_DIR)/executor/here_doc.c \
 	$(SRC_DIR)/feature_test/test_expansor.c \
 	$(SRC_DIR)/feature_test/test_splitted.c \
 	$(SRC_DIR)/feature_test/test_lexer.c \

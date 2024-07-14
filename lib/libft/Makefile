@@ -45,6 +45,7 @@ SOURCE = ft_isalpha\
 	ft_lstiter\
 	ft_lstmap\
 	ft_lstnew\
+	free_splitted\
 	len_to_char\
 	len_to_ptr\
 	safe_malloc\

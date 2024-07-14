@@ -6,13 +6,12 @@
 /*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 21:49:39 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/07/02 01:27:30 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2024/07/09 15:15:22 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <sys/wait.h>
 #include "minishell.h"
-#include <errno.h>
 
 void process_line(char **line)
 {
@@ -52,7 +51,7 @@ int main(int argc, char **argv, char **env)
 //			printf("%s\n", node->word);
 		if (!cmds)
 			continue ;
-		executor(cmds);
+		executor(cmds, env);
 		free_cmd(cmds);
 	}
 }

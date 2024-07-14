@@ -6,7 +6,7 @@
 /*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 16:04:55 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/07/02 01:19:32 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2024/07/09 21:12:12 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ typedef struct s_concat
 	char	*suffix;
 }	t_concat;
 
-char	*get_var_val(const char *str, char **env);
+char	*get_var_val(const char *str, char **env, int exit_status);
 void	get_var_loc(char *str, char *save[2]);
 char	*insert(char *str, char *start, char *end, char *to_insert);
-char	*expand_var(char *str, char **env);
+char	*expand_var(char *str, char **env, int exit_status);
 char	*get_body(const char *str, char *quote, size_t *i);
 char	*get_prefix(const char *str, char *quote, size_t *i);
 char	*concat_expand(const char *str, size_t i, char **env, char q);
-char	*expand_quotes(char *str, char **env);
+char	*expand_quotes(char *str);
 char	*remove_escapes(char *str);
 int		count_protected(char *str);
 int		has_protected(char *str);

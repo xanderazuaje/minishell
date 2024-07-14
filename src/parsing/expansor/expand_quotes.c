@@ -20,7 +20,7 @@ char	*update_final(char *final, char *temp)
 	return (final);
 }
 
-char	*expand_quotes(char *str, char **env)
+char	*expand_quotes(char *str)
 {
 	char		quote;
 	char		*final;
@@ -36,7 +36,7 @@ char	*expand_quotes(char *str, char **env)
 	str = str + i;
 	concat.body = get_body(str, &quote, &i);
 	str = str + i;
-	concat.suffix = expand_quotes(str, env);
+	concat.suffix = expand_quotes(str);
 	final = varg_strjoin(3, concat.prefix, concat.body, concat.suffix);
 	if (final && ft_strchr(final, '\\'))
 		final = update_final(final, temp);

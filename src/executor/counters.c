@@ -1,17 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   executor.h                                         :+:      :+:    :+:   */
+/*   counters.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/27 23:27:59 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/07/09 15:12:21 by xazuaje-         ###   ########.fr       */
+/*   Created: 2024/07/13 14:19:47 by xazuaje-          #+#    #+#             */
+/*   Updated: 2024/07/13 14:20:57 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXECUTOR_H
-# define EXECUTOR_H
+#include "_executor.h"
 
-void executor(t_cmdlist *list, char **env);
-#endif
+int count_processes(const t_cmdlist *list)
+{
+	int i;
+
+	i = 1;
+	while (list)
+	{
+		if (list->flags == pipe_flag)
+			i++;
+		list = list->next;
+	}
+	return (i);
+}
+
+int count_args(const t_cmdlist *list)
+{
+	int i;
+
+	i = 1;
+	while (list && list->flags != pipe_flag)
+	{
+		if (list->flags == argument || list->flags == command)
+			i++;
+		list = list->next;
+	}
+	return (i);
+}

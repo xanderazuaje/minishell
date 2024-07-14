@@ -6,14 +6,12 @@
 /*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 03:54:44 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/06/27 22:37:06 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2024/07/09 06:03:21 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TYPES_H
 # define TYPES_H
-
-# include <stddef.h>
 
 # define INIT 0
 # define ERRO 1
