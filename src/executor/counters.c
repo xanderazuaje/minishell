@@ -12,9 +12,9 @@
 
 #include "_executor.h"
 
-int count_processes(const t_cmdlist *list)
+int	count_processes(const t_cmdlist *list)
 {
-	int i;
+	int	i;
 
 	i = 1;
 	while (list)
@@ -26,9 +26,9 @@ int count_processes(const t_cmdlist *list)
 	return (i);
 }
 
-int count_args(const t_cmdlist *list)
+int	count_args(const t_cmdlist *list)
 {
-	int i;
+	int	i;
 
 	i = 1;
 	while (list && list->flags != pipe_flag)

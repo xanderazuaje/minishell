@@ -12,7 +12,6 @@
 
 #include "_executor.h"
 
-
 void	set_limits_hdoc(char *str, char *save[2], size_t i)
 {
 	if (!str[i])

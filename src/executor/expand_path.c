@@ -6,11 +6,17 @@
 /*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 16:58:30 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/07/13 16:59:04 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2024/07/15 07:19:05 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "_executor.h"
+
+int	is_path(const char *p)
+{
+	return (ft_strchr(p, '/') != NULL || ft_strncmp(p, "..", 3) == 0
+		|| ft_strncmp(p, ".", 2) == 0);
+}
 
 char	*get_path_route(const char *program, t_splitted **routes)
 {
@@ -47,7 +53,7 @@ char	*expand_path(const char *program, char **env)
 	if (program == NULL)
 		return (NULL);
 	routes = NULL;
-	if (ft_strchr(program, '/') != NULL || ft_strncmp(program, "..", 3) == 0 || ft_strncmp(program, ".", 2) == 0)
+	if (is_path(program))
 		return (ft_strdup(program));
 	while (*env)
 	{

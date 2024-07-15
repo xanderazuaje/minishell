@@ -12,9 +12,9 @@
 
 #include "_executor.h"
 
-void set_hdocs(t_cmdlist *list, char **env, int **hdoc_pipes)
+void	set_hdocs(t_cmdlist *list, char **env, int **hdoc_pipes)
 {
-	int		count;
+	int	count;
 
 	count = count_processes(list);
 	*hdoc_pipes = (int *) safe_malloc(count * sizeof(int));
@@ -64,62 +64,6 @@ void execute_it(char **env, char **arg_list, char *cmd)
 	}
 }
 
-int set_redirections(t_cmdlist *list, int *hdoc_pipes, int i)
-{
-	int	fd;
-	char *file_name;
-
-	while (list)
-	{
-		if (list->flags == infile)
-		{
-			file_name = list->next->word;
-			fd = open(file_name, O_RDONLY);
-			if (fd < 0)
-			{
-				perror(file_name);
-				return (0);
-			}
-			if (dup2(fd, STDIN_FILENO) < 0)
-				perror(file_name);
-			close(fd);
-		}
-		else if (list->flags == here_document)
-		{
-			if (dup2(hdoc_pipes[i], STDIN_FILENO) < 0)
-				perror("here document");
-			close(hdoc_pipes[i]);
-		}
-		else if (list->flags == outfile)
-		{
-			file_name = list->next->word;
-			fd = open(file_name, O_RDWR | O_CREAT | O_TRUNC, 0644);
-			if (fd < 0)
-			{
-				perror(file_name);
-				return (0);
-			}
-			if (dup2(fd, STDOUT_FILENO) < 0)
-				perror(file_name);
-			close(fd);
-		}
-		else if (list->flags == append_outfile)
-		{
-			file_name = list->next->word;
-			fd = open(file_name, O_RDWR | O_CREAT | O_APPEND, 0644);
-			if (fd < 0)
-			{
-				perror(file_name);
-				return (0);
-			}
-			if (dup2(fd, STDOUT_FILENO) < 0)
-				perror(file_name);
-			close(fd);
-		}
-		list = list->next;
-	}
-	return (1);
-}
 
 t_cmdlist *next_cmd(t_cmdlist *list)
 {

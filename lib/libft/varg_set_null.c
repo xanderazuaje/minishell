@@ -6,15 +6,15 @@
 /*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 23:47:20 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/06/27 23:48:11 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2024/07/15 07:11:54 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void varg_set_null(int n, ...)
+void	varg_set_null(int n, ...)
 {
-	va_list 	ptr;
+	va_list		ptr;
 	void		**ptr2;
 
 	va_start(ptr, n);
