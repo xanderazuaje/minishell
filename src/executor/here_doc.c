@@ -6,7 +6,7 @@
 /*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 14:32:16 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/07/13 15:26:13 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2024/07/15 06:34:19 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,15 @@ int	must_expand(const t_cmdlist *list)
 
 int	try_write(int pipe_fd[2], const char *line)
 {
-	if (write(pipe_fd[WR_PIPE], line, ft_strlen(line)) == -1)
+	char *line_w_nl;
+
+	line_w_nl = ft_strjoin(line, "\n");
+	if (write(pipe_fd[WR_PIPE], line_w_nl, ft_strlen(line_w_nl)) == -1)
 	{
 		perror("error:");
 		return (0);
 	}
+	free(line_w_nl);
 	return (1);
 }
 

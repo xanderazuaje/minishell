@@ -6,7 +6,7 @@
 /*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 23:48:35 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/07/13 17:00:16 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2024/07/15 02:35:20 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "../types.h"
 # include <stdarg.h>
 # include <fcntl.h>
+# include <sys/wait.h>
 # include "../minishell.h"
 
 void    executor(t_cmdlist *list, char **env);
