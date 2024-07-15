@@ -6,7 +6,7 @@
 /*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 14:32:16 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/07/15 19:55:31 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2024/07/15 20:21:35 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ void	hdoc_eof_error(int count, char *limit)
 	free(count_str);
 }
 
-int	must_expand(const t_cmdlist *list)
+int	must_expand(char *word)
 {
-	return (ft_strchr(list->word, '\'') == NULL
-		|| ft_strchr(list->word, '"') == NULL);
+	return (ft_strchr(word, '\'') == NULL
+		&& ft_strchr(word, '"') == NULL);
 }
 
 int	try_write(int pipe_fd[2], const char *line)
@@ -64,7 +64,7 @@ void	here_doc(t_cmdlist *list, char **env, int pipe_fd[2], char **line)
 		}
 		if (ft_strncmp(*line, limit, ft_strlen(limit)) == 0)
 			break ;
-		if (ft_strchr(*line, '$') && must_expand(list->next))
+		if (ft_strchr(*line, '$') && must_expand(list->next->word))
 			*line = expand_hdoc(*line, env);
 		if (!try_write(pipe_fd, *line))
 			break ;

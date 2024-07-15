@@ -6,7 +6,7 @@
 /*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 03:54:44 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/07/09 06:03:21 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2024/07/15 21:29:47 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,11 @@ typedef struct s_cmdlist
 	t_flags				flags;
 	struct s_cmdlist	*next;
 }	t_cmdlist;
+
+typedef struct s_cmd
+{
+	char	**arg_list;
+	char	*cmd;
+}	t_cmd;
+
 #endif

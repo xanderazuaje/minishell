@@ -6,7 +6,7 @@
 /*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 23:27:02 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/07/15 06:47:05 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2024/07/15 21:32:47 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,10 @@ void execute_it(char **env, char **arg_list, char *cmd)
 			exit(127);
 		}
 	}
-	else if (arg_list[0] == NULL)
-	{
-		exit(0);
-	}
 	else
 	{
-		write(2,  arg_list[0], strlen(arg_list[0]));
+		if (arg_list[0] != NULL)
+			write(2,  arg_list[0], strlen(arg_list[0]));
 		write(2,  ": command not found\n", 20);
 		exit(127);
 	}
@@ -80,35 +77,83 @@ t_cmdlist *next_cmd(t_cmdlist *list)
 	return (list);
 }
 
-void	executor(t_cmdlist *list, char **env)
+void wait_children()
 {
-	char	**arg_list;
-	int		*hdoc_pipes;
-	char	*cmd;
 	int		exit_status;
-	int		i;
 
-	i = 0;
-	set_hdocs(list, env, &hdoc_pipes);
-	cmd = NULL;
-	while (list)
-	{
-		arg_list = set_cmd_args(list, env, &cmd);
-		if (fork() == 0)
-		{
-			if (set_redirections(list, hdoc_pipes, i))
-				execute_it(env, arg_list, cmd);
-			exit(1);
-		}
-		free(cmd);
-		cmd = NULL;
-		free(arg_list);
-		list = next_cmd(list);
-		i++;
-	}
 	while (waitpid(-1, &exit_status, 0) != -1)
 	{}
 	prev_exit_status(exit_status);
+}
+
+void set_pipes(t_cmdlist *list, int i, int pipes_fd[2][2])
+{
+	if (i > 0 || next_cmd(list))
+	{
+		if (i == 0)
+		{
+			dup2(pipes_fd[0][WR_PIPE], STDOUT_FILENO);
+			close(pipes_fd[0][WR_PIPE]);
+			close(pipes_fd[0][RD_PIPE]);
+		}
+		else if (next_cmd(list) == NULL)
+		{
+			dup2(pipes_fd[1][RD_PIPE], STDIN_FILENO);
+			close(pipes_fd[1][WR_PIPE]);
+			close(pipes_fd[1][RD_PIPE]);
+		}
+		else
+		{
+			dup2(pipes_fd[0][WR_PIPE], STDOUT_FILENO);
+			close(pipes_fd[0][WR_PIPE]);
+			close(pipes_fd[0][RD_PIPE]);
+			dup2(pipes_fd[1][RD_PIPE], STDIN_FILENO);
+			close(pipes_fd[1][WR_PIPE]);
+			close(pipes_fd[1][RD_PIPE]);
+		}
+	}
+}
+
+void	executor(t_cmdlist *list, char **env)
+{
+	t_cmd	command;
+	int		*hdoc_pipes;
+	int		i;
+	int		pipes_fd[2][2];
+	int		cmd_count;
+
+	i = 0;
+	cmd_count = count_processes(list);
+	set_hdocs(list, env, &hdoc_pipes);
+	command.cmd = NULL;
+	while (list)
+	{
+		if (next_cmd(list))
+			pipe(pipes_fd[0]);
+		command.arg_list = set_cmd_args(list, env, &(command.cmd));
+		if (fork() == 0)
+		{
+			set_pipes(list, i, pipes_fd);
+			if (set_redirections(list, hdoc_pipes, i))
+				execute_it(env, command.arg_list, command.cmd);
+			exit(1);
+		}
+		if (cmd_count > 1)
+		{
+			close(pipes_fd[0][WR_PIPE]);
+			pipes_fd[1][WR_PIPE] = pipes_fd[0][WR_PIPE];
+			pipes_fd[1][RD_PIPE] = pipes_fd[0][RD_PIPE];
+		}
+		close(hdoc_pipes[i]);
+		free(command.cmd);
+		command.cmd = NULL;
+		free(command.arg_list);
+		list = next_cmd(list);
+		i++;
+	}
+	if (cmd_count > 1)
+		close(pipes_fd[1][RD_PIPE]);
+	wait_children();
 	/*last*/
 	free(hdoc_pipes);
 }
