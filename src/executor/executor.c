@@ -35,7 +35,7 @@ char **set_cmd_args(t_cmdlist *list, char **env, char **cmd)
 	{
 		if (list->flags == argument || list->flags == command)
 		{
-			if (list->flags == command)
+			if (*cmd == NULL)
 				*cmd = expand_path(list->word, env);
 			arg_list[i] = list->word;
 			i++;
@@ -55,6 +55,10 @@ void execute_it(char **env, char **arg_list, char *cmd)
 			perror(arg_list[0]);
 			exit(127);
 		}
+	}
+	else if (arg_list[0] == NULL)
+	{
+		exit(0);
 	}
 	else
 	{
@@ -86,6 +90,7 @@ void	executor(t_cmdlist *list, char **env)
 
 	i = 0;
 	set_hdocs(list, env, &hdoc_pipes);
+	cmd = NULL;
 	while (list)
 	{
 		arg_list = set_cmd_args(list, env, &cmd);
@@ -96,6 +101,7 @@ void	executor(t_cmdlist *list, char **env)
 			exit(1);
 		}
 		free(cmd);
+		cmd = NULL;
 		free(arg_list);
 		list = next_cmd(list);
 		i++;

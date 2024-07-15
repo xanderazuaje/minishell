@@ -6,7 +6,7 @@
 /*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 06:57:04 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/07/15 06:58:33 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2024/07/15 19:49:28 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	set_redirections(t_cmdlist *list, const int *hdoc_pipes, const int i)
 	int	fd;
 	int	value;
 
-	while (list)
+	while (list && list->flags != pipe_flag)
 	{
 		if (list->flags == infile)
 			value = set_infile(list, &fd);
