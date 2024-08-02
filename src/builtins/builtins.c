@@ -13,5 +13,7 @@ int exec_builtin(char **args, char **env)
         result = do_env(args);
     if (ft_strcmp(args[0], "pwd") == 0)
         result = do_pwd();
+    if (ft_strcmp(args[0], "exit") == 0)
+        result = do_env(args);
     return (result);
 }

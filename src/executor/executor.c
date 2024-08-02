@@ -6,7 +6,7 @@
 /*   By: mhiguera <mhiguera@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 23:27:02 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/07/29 17:26:11 by mhiguera         ###   ########.fr       */
+/*   Updated: 2024/07/30 20:17:39 by mhiguera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,8 @@ void	executor(t_cmdlist *list, char **env)
 	cmd_count = count_processes(list);
 	set_hdocs(list, env, &hdoc_pipes);
 	command.cmd = NULL;
-	tmp = exec_builtin(list, env); // MARINA ESTUVO AQUÍ
+	tmp = exec_builtin(command.arg_list, env); // MARINA ESTUVO AQUÍ
+	// COMPROBAR QUE SE HAYAN EJECUTADO BIEN LOS BUILTIN
 	while (list)
 	{
 		if (next_cmd(list))
