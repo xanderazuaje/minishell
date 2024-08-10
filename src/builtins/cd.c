@@ -2,7 +2,15 @@
 
 //char *remove_quotes()
 
-int path(char *cd, char *command)
+void update_old_pwd(char **args)
+{
+    //aquí un while que vaya leyendo el env y busque si la variable OLDPWD ya existe
+        //si existe que reemplace su valor
+    //si no existe, ampliamos el array y añadimos la nueva variable OLDPWD al final
+    
+}
+
+int path(char *cd, char *command, char **args)
 {
     char *temp;
 
@@ -18,7 +26,7 @@ int path(char *cd, char *command)
     else
     {
         free(temp);
-        
+        update_old_pwd();
         //cambiar oldpwd a pwd actual
         return 0;
     }
