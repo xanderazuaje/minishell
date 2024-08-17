@@ -29,12 +29,12 @@ int path(char *cd, char *command)
 void do_cd(char *args)
 {
     // Si el usuario no pasa ningún argumento después de cd
-    if (args == NULL)
+    if (!args[1])
     {
         char *home = getenv("HOME");
 
         if (home == NULL)
-            perror("cd: HOME environment variable is not set\n")
+            perror("cd: HOME environment variable is not set\n");
         else
         {
             // Manda al usuario al home
@@ -45,6 +45,6 @@ void do_cd(char *args)
     // Si el usuario pasa argumentos después de cd
     {
         if (!chdir(args)) //con esto se comprueba que no le pasan más de un comando???
-            perror("Couldn't change directory")
+            perror("Couldn't change directory");
     }
 }

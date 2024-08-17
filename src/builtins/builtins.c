@@ -14,6 +14,9 @@ int exec_builtin(char **args, char **env)
     if (ft_strcmp(args[0], "pwd") == 0)
         result = do_pwd();
     if (ft_strcmp(args[0], "exit") == 0)
-        result = do_env(args);
+    {
+        printf("hooola gente\n");
+        result = do_exit(args);
+    }
     return (result);
 }

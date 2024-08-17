@@ -1,8 +1,25 @@
 #include "minishell.h"
 
-int main(void)
+void do_exit(char **args)
 {
-    printf("Exit success!");
-    exit(0);
-    return 0;
+    //TENGO QUE PRINTEAR PREV_EXIT_STATUS PARA VER CÓMO FUNCIONA Y VER SI LO MODIFICO AHORA O LUEGO
+    int exit_status = prev_exit_status(0);  //coge el último estado sin modificarlo al principio
+
+    if (args[1] != NULL)
+    {
+        int status;
+        status = ft_atoi(args[1]);
+        
+        if (status >= 0 && status <= 255)
+            exit_status = status;
+        else
+        {
+            printf(stderr, "exit: %s: numeric argument required\n", args[1]);
+            exit_status = 2;
+        }
+    }
+    // prev_exit_status(exit_status);????? no lo sé
+    printf("byebye<3\n");
+    exit(exit_status);
+    //intuyo que después de ejecutar el comando habrá que pasarle el status nuevo a prev_Exit_Status
 }
