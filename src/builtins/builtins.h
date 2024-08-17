@@ -1,6 +1,13 @@
 #ifndef BUILTINS_H
 # define BUILTINS_H
 
-int exec_builtin(char **args, char **env);
+#include "../minishell.h"
+
+void exec_builtin(char **args, char **env);
+
+void do_cd(char **args);
+void do_pwd(void);
+void do_exit(char **args);
+
 
 #endif

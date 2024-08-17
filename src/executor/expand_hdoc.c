@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_hdoc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
+/*   By: mhiguera <mhiguera@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 06:36:59 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/07/09 18:08:42 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2024/08/17 10:52:27 by mhiguera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,16 @@ void	set_limits_hdoc(char *str, char *save[2], size_t i)
 		save[0] = NULL;
 		save[1] = NULL;
 	}
-	else if (isdigit(str[i + 1]) || str[i + 1] == '?')
+	else if (ft_isdigit(str[i + 1]) || str[i + 1] == '?')
 	{
 		save[0] = &(str[i]);
 		save[1] = &(str[i + 2]);
 	}
-	else if (isalpha(str[i + 1]) || str[i + 1] == '_')
+	else if (ft_isalpha(str[i + 1]) || str[i + 1] == '_')
 	{
 		save[0] = &(str[i]);
 		i++;
-		while (isalnum(str[i]) || str[i] == '_')
+		while (ft_isalnum(str[i]) || str[i] == '_')
 			i++;
 		save[1] = &(str[i]);
 	}

@@ -1,4 +1,4 @@
-#include "minishell.h"
+#include "builtins.h"
 
 //char *remove_quotes()
 
@@ -34,7 +34,7 @@ int path(char *cd, char *command, char **args)
     return 1;
 }
 
-void do_cd(char *args)
+void do_cd(char **args)
 {
     // Si el usuario no pasa ningún argumento después de cd
     if (!args[1])
@@ -52,7 +52,7 @@ void do_cd(char *args)
     }
     // Si el usuario pasa argumentos después de cd
     {
-        if (!chdir(args)) //con esto se comprueba que no le pasan más de un comando???
+        if (!chdir(*args)) //con esto se comprueba que no le pasan más de un comando???
             perror("Couldn't change directory");
     }
 }

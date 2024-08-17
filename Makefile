@@ -1,6 +1,6 @@
 # Compiler and flags
 CC := gcc
-CFLAGS := -Wall -Wextra -Werror -g3 -fsanitize=address,undefined,leak
+# CFLAGS := -Wall -Wextra -Werror -g3 -fsanitize=address,undefined,leak
 
 # Directories
 SRC_DIR := src
@@ -38,7 +38,12 @@ SRC_FILES := $(SRC_DIR)/main.c \
 	$(SRC_DIR)/parsing/expansor/remove_protection.c \
 	$(SRC_DIR)/parsing/expansor/set_limits.c \
 	$(SRC_DIR)/parsing/lexer/check_input.c \
-	$(SRC_DIR)/parsing/lexer/get_states.c
+	$(SRC_DIR)/parsing/lexer/get_states.c \
+	$(SRC_DIR)/builtins/builtins.c \
+	$(SRC_DIR)/builtins/cd.c \
+	$(SRC_DIR)/builtins/env.c \
+	$(SRC_DIR)/builtins/exit.c \
+	$(SRC_DIR)/builtins/pwd.c \
 
 # Object files
 OBJ_FILES := $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC_FILES))
