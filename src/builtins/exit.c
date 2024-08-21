@@ -14,7 +14,7 @@ void do_exit(char **args)
             exit_status = status;
         else
         {
-            printf(stderr, "exit: %s: numeric argument required\n", args[1]);
+            printf("errorcito\n");
             exit_status = 2;
         }
     }
