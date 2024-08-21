@@ -17,6 +17,6 @@ void do_exit(char **args)
             exit_status = status;
     }
     prev_exit_status(exit_status);
-    printf("byebye<3\n");
+    printf("tonto el que lo lea <3\n");
     exit(exit_status);
 }
