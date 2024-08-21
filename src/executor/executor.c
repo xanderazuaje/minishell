@@ -114,6 +114,21 @@ void set_pipes(t_cmdlist *list, int i, int pipes_fd[2][2])
 	}
 }
 
+int is_builtin(char **arg_list)
+{
+	if (arg_list)
+	{
+		if (ft_strncmp(arg_list[0], "env", 4) == 0)
+			return (1);
+		if (ft_strncmp(arg_list[0], "pwd", 4) == 0)
+			return (1);
+		if (ft_strncmp(arg_list[0], "exit", 5) == 0)
+			return (1);
+		return (0);
+	}
+	return (0);
+}
+
 void	executor(t_cmdlist *list, char **env)
 {
 	t_cmd	command;
@@ -126,26 +141,34 @@ void	executor(t_cmdlist *list, char **env)
 	cmd_count = count_processes(list);
 	set_hdocs(list, env, &hdoc_pipes);
 	command.cmd = NULL;
-	exec_builtin(command.arg_list, env); // MARINA ESTUVO AQUÍ
-	// COMPROBAR QUE SE HAYAN EJECUTADO BIEN LOS BUILTIN
 	while (list)
 	{
 		if (next_cmd(list))
 			pipe(pipes_fd[0]);
 		command.arg_list = set_cmd_args(list, env, &(command.cmd));
-		if (fork() == 0)
+		if (cmd_count > 1 || !is_builtin(command.arg_list))
 		{
-			set_pipes(list, i, pipes_fd);
-			if (set_redirections(list, hdoc_pipes, i))
-				execute_it(env, command.arg_list, command.cmd);
-			exit(1);
+			if (fork() == 0)
+			{
+				set_pipes(list, i, pipes_fd);
+				if (set_redirections(list, hdoc_pipes, i))
+				{
+					if (is_builtin(command.arg_list))
+						exec_builtin(command.arg_list, env);
+					else
+						execute_it(env, command.arg_list, command.cmd);
+				}
+				exit(1);
+			}
+			if (cmd_count > 1)
+			{
+				close(pipes_fd[0][WR_PIPE]);
+				pipes_fd[1][WR_PIPE] = pipes_fd[0][WR_PIPE];
+				pipes_fd[1][RD_PIPE] = pipes_fd[0][RD_PIPE];
+			}
 		}
-		if (cmd_count > 1)
-		{
-			close(pipes_fd[0][WR_PIPE]);
-			pipes_fd[1][WR_PIPE] = pipes_fd[0][WR_PIPE];
-			pipes_fd[1][RD_PIPE] = pipes_fd[0][RD_PIPE];
-		}
+		else if (is_builtin(command.arg_list))
+			exec_builtin(command.arg_list, env);
 		close(hdoc_pipes[i]);
 		free(command.cmd);
 		command.cmd = NULL;

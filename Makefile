@@ -1,6 +1,6 @@
 # Compiler and flags
 CC := gcc
-CFLAGS := -Wall -Wextra -Werror -g3 -fsanitize=address,undefined
+CFLAGS := -Wall -Wextra -Werror -g3 -fsanitize=address,leak,undefined
 
 # Directories
 SRC_DIR := src

@@ -40,10 +40,9 @@ int main(int argc, char **argv, char **env)
 		line = readline("\033[0;33mbASSh> \033[0;0m");
 		if (line && *line)
 			add_history(line);
-		if (!line || ft_strncmp(line, "exit", 5) == 0)
+		if (!line)
 		{
 			free(line);
-			write(1, "bai\n", 4);
 			exit(exit_status);
 		}
 		cmds = parse_str(line, env);
