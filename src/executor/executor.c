@@ -116,7 +116,7 @@ void set_pipes(t_cmdlist *list, int i, int pipes_fd[2][2])
 
 int is_builtin(char **arg_list)
 {
-	if (arg_list)
+	if (arg_list && arg_list[0])
 	{
 		if (ft_strncmp(arg_list[0], "env", 4) == 0)
 			return (1);
@@ -151,7 +151,7 @@ void	executor(t_cmdlist *list, char **env)
 			if (fork() == 0)
 			{
 				set_pipes(list, i, pipes_fd);
-				if (set_redirections(list, hdoc_pipes, i))
+				if (set_redirections(list, hdoc_pipes, i, env))
 				{
 					if (is_builtin(command.arg_list))
 						exec_builtin(command.arg_list, env);

@@ -13,18 +13,6 @@
 #include <sys/wait.h>
 #include "minishell.h"
 
-void process_line(char **line)
-{
-	(void) line;
-	/*
-	char *result;
-	result = asterix_expander(*line);
-	free(result);
-	exit(0);
-	 */
-}
-
-
 int main(int argc, char **argv, char **env)
 {
 	char *line;
@@ -46,8 +34,6 @@ int main(int argc, char **argv, char **env)
 			exit(exit_status);
 		}
 		cmds = parse_str(line, env);
-//		for (t_cmdlist *node = cmds; node; node = node->next)
-//			printf("%s\n", node->word);
 		if (!cmds)
 			continue ;
 		executor(cmds, env);

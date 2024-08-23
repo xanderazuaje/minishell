@@ -12,12 +12,12 @@
 
 #include "_expansor.h"
 
-short	skip_here_doc(const char *str, size_t *p)
+short	skip_redir(const char *str, size_t *p)
 {
 	size_t	i;
 
 	i = *p;
-	if (str[i] == '<' && str[i + 1] == '<')
+	if (str[i] == '<' || str[i] == '>')
 	{
 		i += 2;
 		while (isspace(str[i]))
@@ -50,7 +50,7 @@ void	get_var_loc(char *str, char *save[2])
 	quote = '\0';
 	while (str[i])
 	{
-		if (skip_here_doc(str, &i) == -1)
+		if (skip_redir(str, &i) == -1)
 			break ;
 		if (!quote || quote == '"')
 		{
