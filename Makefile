@@ -1,6 +1,6 @@
 # Compiler and flags
 CC := gcc
-CFLAGS := -Wall -Wextra -Werror -g3 -fsanitize=address,leak,undefined
+CFLAGS := -Wall -Wextra -Werror -g3 -fsanitize=address,undefined
 
 # Directories
 SRC_DIR := src
@@ -44,6 +44,7 @@ SRC_FILES := $(SRC_DIR)/main.c \
 	$(SRC_DIR)/builtins/env.c \
 	$(SRC_DIR)/builtins/exit.c \
 	$(SRC_DIR)/builtins/pwd.c \
+	$(SRC_DIR)/signals.c \
 
 # Object files
 OBJ_FILES := $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC_FILES))
