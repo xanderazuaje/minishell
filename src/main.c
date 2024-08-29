@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
+/*   By: mhiguera <mhiguera@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 21:49:39 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/07/09 15:15:22 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2024/08/29 13:47:55 by mhiguera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int main(int argc, char **argv, char **env)
 	exit_status = 0;
 	(void ) argc;
 	(void ) argv;
+	init_signals();
 	while (1)
 	{
 		line = readline("\033[0;33mbASSh> \033[0;0m");

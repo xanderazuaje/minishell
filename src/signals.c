@@ -1,13 +1,19 @@
 #include "minishell.h"
+#include <readline/readline.h>
+#include <readline/history.h>
 
-void sig_handler(int sig)
+void sigint_handler(int sig)
 {
-    printf("Hola esto es pa saber si me hace\n");
+    printf("Eres gay por pulsar CtrlC\n");
+    //aqui falla porque no coge bien la libreria readline creo
+    rl_on_new_line();
+    rl_replace_line("", 0);
+    rl_redisplay();
     (void) sig;
 }
 
 void	init_signals(void)
 {
-	signal(SIGINT, sig_handler);
-	signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, sigint_handler); //este tiene que interrumpir el proceso el ctrol c
+	signal(SIGQUIT, SIG_IGN); //este tiene que ignorar el ctrol y barrita
 }
