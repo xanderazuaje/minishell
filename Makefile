@@ -2,6 +2,10 @@
 CC := gcc
 CFLAGS := -Wall -Wextra -Werror -g3 -fsanitize=address,undefined
 
+# Flags para readline
+LDFLAGS += -L/opt/homebrew/opt/readline/lib
+CPPFLAGS += -I/opt/homebrew/opt/readline/include
+
 # Directories
 SRC_DIR := src
 OBJ_DIR := obj
@@ -83,11 +87,11 @@ rebonus: fclean bonus
 
 # Build rule
 $(TARGET): $(OBJ_FILES)
-	$(CC) $(CFLAGS) $^ -o $@ $(LIBS)
+	$(CC) $(CFLAGS) $(LDFLAGS) $^ -o $@ $(LIBS)
 # Object file rule
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(@D)
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
 
 # Phony targets
 .PHONY: all clean fclean re
