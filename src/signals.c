@@ -4,8 +4,7 @@
 
 void sigint_handler(int sig)
 {
-    printf("Eres gay por pulsar CtrlC\n");
-    //aqui falla porque no coge bien la libreria readline creo
+    printf("\n");
     rl_on_new_line();
     rl_replace_line("", 0);
     rl_redisplay();

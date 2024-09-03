@@ -2,8 +2,9 @@
 
 void do_env(char **envp)
 {
-    int i = 0;
+    int i;
 
+    i = 0;
     printf("ESTOY EN ENV\n");
     while (envp[i] != NULL)
     {

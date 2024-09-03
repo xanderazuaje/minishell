@@ -2,57 +2,68 @@
 
 // //char *remove_quotes()
 
-// void update_old_pwd(char **args)
-// {
-//     //aquí un while que vaya leyendo el env y busque si la variable OLDPWD ya existe
-//         //si existe que reemplace su valor
-//     //si no existe, ampliamos el array y añadimos la nueva variable OLDPWD al final
-    
-// }
+int envlen(char **env)
+{
+    int i;
 
-// int path(char *cd, char *command, char **args)
-// {
-//     char *temp = NULL;
+    i = 0;
+    while (env[i] != NULL)
+        i++;
+    return (i);
+}
 
-//     //temp = remove_quotes(command);
-//     //Si retrocedo, que me lleve a la ruta guardada en OLDPWD (que es la anterior en la que estuve)
-//     if (!strncmp(temp, "-", 2))
-//     {
-//         chdir(getenv("OLDPWD"));
-//         return 0;
-//     }
-//     if (!chdir(temp))
-//         perror("No such file or directory!"); //falta imprimir por error
-//     else
-//     {
-//         free(temp);
-//         update_old_pwd(args);
-//         //cambiar oldpwd a pwd actual
-//         return 0;
-//     }
-//     free(temp);
-//     return 1;
-// }
+int update_old_pwd(char **args, char **env)
+{
+    int i;
+    char *actualpath;
+    int len;
+    char **new_env;
 
-// void do_cd(char **args)
-// {
-//     // Si el usuario no pasa ningún argumento después de cd
-//     if (!args[1])
-//     {
-//         char *home = getenv("HOME");
+    i = 0;
+    len = envlen(env);
+    actualpath = getcwd(NULL, 0);
+    new_env = malloc((len + 2) * sizeof(char *));
+    while (env[i] != NULL)
+    {
+        new_env[i] = env[i];
+        if (ft_strncmp(env[i], "OLDPWD=", 7) == 0) //existe
+        {
+            //si existe no tengo que crear la variable, simplemente cambiar donde toca
+            new_env[i] = ft_strjoin("OLDPWD=", actualpath);
+        }
+        i++;
+    }
+    new_env[i - 1] = ft_strjoin("OLDPWD=", actualpath);
+    new_env[i] = NULL;
+    (void) args;
+    return 0;
+}
 
-//         if (home == NULL)
-//             perror("cd: HOME environment variable is not set\n");
-//         else
-//         {
-//             // Manda al usuario al home
-//             if (!chdir(home))
-//                 perror("Couldn't change directory");
-//         }
-//     }
-//     // Si el usuario pasa argumentos después de cd
-//     {
-//         if (!chdir(*args)) //con esto se comprueba que no le pasan más de un comando???
-//             perror("Couldn't change directory");
-//     }
-// }
+int path(char **args, char **env)
+{
+    char *temp = NULL;
+
+    //Si retrocedo, que me lleve a la ruta guardada en OLDPWD (que es la anterior en la que estuve)
+    if (!strncmp(temp, "-", 2))
+    {
+        chdir(getenv("OLDPWD"));
+        return 0;
+    }
+    if (!chdir(temp))
+        perror("No such file or directory!");
+    else
+    {
+        free(temp);
+        update_old_pwd(args, env);
+        return 0;
+    }
+    free(temp);
+    (void) args;
+    return 1;
+}
+
+void do_cd(char **args, char **env)
+{
+    //si no hay argumentos entonces (go home)
+    //si hay 1 argumento entonces (go there)
+}
