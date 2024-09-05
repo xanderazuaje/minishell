@@ -12,4 +12,6 @@ void exec_builtin(char **args, char **env)
         do_exit(args);
     if (ft_strncmp(args[0], "cd", 3) == 0)
         do_cd(args, env);
+    if (ft_strncmp(args[0], "echo", 5) == 0)
+        do_echo(args);
 }

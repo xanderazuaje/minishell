@@ -6,7 +6,7 @@
 /*   By: mhiguera <mhiguera@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 23:27:02 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/09/03 12:36:10 by mhiguera         ###   ########.fr       */
+/*   Updated: 2024/09/05 21:19:30 by mhiguera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,8 @@ int is_builtin(char **arg_list)
 		if (ft_strncmp(arg_list[0], "exit", 5) == 0)
 			return (1);
 		if (ft_strncmp(arg_list[0], "cd", 3) == 0)
+			return (1);
+		if (ft_strncmp(arg_list[0], "echo", 5) == 0)
 			return (1);
 		return (0);
 	}

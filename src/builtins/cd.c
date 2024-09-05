@@ -64,6 +64,8 @@ int path(char **args, char **env)
 
 void do_cd(char **args, char **env)
 {
+    (void) args;
+    (void) env;
     //si no hay argumentos entonces (go home)
     //si hay 1 argumento entonces (go there)
 }
