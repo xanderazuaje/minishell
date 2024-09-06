@@ -27,7 +27,7 @@ int do_echo(char **args)
     int linebr;
     int i;
     
-    if (!args || !args[0]) //ESTO NO FUNCIONA POR ALGUNA RAZON JO
+    if (!args || !args[1])
         return (printf("\n"), 0);
     linebr = has_flag(args[1]); // 0 tiene, 1 no tiene
     i = 1;
