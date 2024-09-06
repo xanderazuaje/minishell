@@ -49,6 +49,8 @@ SRC_FILES := $(SRC_DIR)/main.c \
 	$(SRC_DIR)/builtins/exit.c \
 	$(SRC_DIR)/builtins/pwd.c \
 	$(SRC_DIR)/builtins/echo.c \
+	$(SRC_DIR)/builtins/export.c \
+	$(SRC_DIR)/builtins/utils.c \
 	$(SRC_DIR)/signals.c \
 
 # Object files

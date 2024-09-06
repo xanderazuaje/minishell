@@ -17,11 +17,6 @@ int has_flag(char *str)
     return 0; //si si tiene la n flag
 }
 
-//POSIBLE INCONVENIENTE: SI PONGO ECHO -N -N -N HOLA, SOLO TIENE QUE IMPRIMIR HOLA, PERO SI PONGO
-// ECHO -N HOLA -N TIENE QUE IMPRIMIR HOLA -N SOLUCIONADOOOO**
-
-//ERROR CUANDO SOLO PONGO ECHO, POR QUÉ NO ME HACE CASO?
-
 int do_echo(char **args)
 {
     int linebr;
@@ -33,7 +28,7 @@ int do_echo(char **args)
     i = 1;
     while (args[i] != NULL)
     {
-        if (args[i][0] == '-' && args[i][1] == 'n' && linebr == 0) //si pones varias -n que las ignore
+        if (args[i][0] == '-' && args[i][1] == 'n' && linebr == 0) //si pones varias -n que las ignore y si cuelas un -nr que no lo ignore
             i++;
         else
             break;

@@ -14,4 +14,6 @@ void exec_builtin(char **args, char **env)
         do_cd(args, env);
     if (ft_strncmp(args[0], "echo", 5) == 0)
         do_echo(args);
+    if (ft_strncmp(args[0], "export", 7) == 0)
+        do_export(args, env);
 }

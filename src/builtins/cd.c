@@ -2,16 +2,6 @@
 
 // //char *remove_quotes()
 
-int envlen(char **env)
-{
-    int i;
-
-    i = 0;
-    while (env[i] != NULL)
-        i++;
-    return (i);
-}
-
 int update_old_pwd(char **args, char **env)
 {
     int i;

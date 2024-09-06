@@ -11,5 +11,8 @@ void do_exit(char **args);
 void do_env(char **envp);
 void do_cd(char **args, char **env);
 int do_echo(char **args);
+int do_export(char **args, char **env);
+//utils
+int envlen(char **env);
 
 #endif
