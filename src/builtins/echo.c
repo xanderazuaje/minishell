@@ -33,7 +33,7 @@ int do_echo(char **args)
     i = 1;
     while (args[i] != NULL)
     {
-        if (args[i][0] == '-' && args[i][1] == 'n') //si pones varias -n que las ignore
+        if (args[i][0] == '-' && args[i][1] == 'n' && linebr == 0) //si pones varias -n que las ignore
             i++;
         else
             break;
