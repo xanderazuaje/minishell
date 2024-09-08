@@ -1,33 +1,85 @@
 #include "builtins.h"
 
-int add_to_env(char *name, char *value, char **new_env)
+int add_to_env(char *new_var, char **env, int len)
 {
-    //int i;
+	int		i;
+    char **copy_env;
+
+    i = 0;
+    copy_env = malloc((len + 2) * sizeof(char *));
+    if (!copy_env)
+    {
+        printf("AQUI FALLA\n");
+		return -1;
+    }
+    while (i < len)
+	{
+		copy_env[i] = ft_strdup(env[i]);
+		i++;
+	}
+    printf("aquií llega?\n");
+	copy_env[i] = ft_strdup(new_var);
+	copy_env[i + 1] = NULL;
+    i = 0;
+    //COMPROBACIÓN FUNCIONA
+    while (copy_env[i] != NULL)
+    {
+        printf("%s\n", copy_env[i]);
+        i++;
+    }
+    //*******FALTA METERLO EN EL ENV ORIGINAL PARA QUE AL HACER ENV SIGA APARECIENDO LA VARIABLE */
+	// free(copy_env);
+	// copy_env = copy_env;
+    return 0;
+}
+
+int check_env(char *name, char *value, char **new_env, char **env)
+{
+    int i;
+    int j;
     char *new_var;
-    (void) new_env;
     int namelen;
 
-    //i = 0;
+    i = 0;
     namelen = ft_strlen(name);
     printf("esto mide name: %d\n", namelen);
     printf("esto mide value: %zu\n", ft_strlen(value));
     new_var = malloc((namelen + ft_strlen(value)) * sizeof(char *)); //crear nueva variable name=value
     if (!new_var)
         return -1;
+    while (name[i])
+    {
+        new_var[i] = name[i];
+        i++;
+    }
+    j = 0;
+    while (value[j])
+    {
+        new_var[i] = value[j];
+        i++;
+        j++;
+    }
+    new_var[i] = '\0';
     printf("esto mide la nueva variable: %zu\n", namelen + ft_strlen(value));
-    // while (new_env[i]) //mirar si existe ya la variable
-    // {
-    //     if (ft_strncmp(new_env[i], name, namelen) == 0 && new_env[i][namelen] == '=') //si existe?
-    //     {
-    //         free(new_env[i]); //reemplazo la existente
-    //         new_env[i] = new_var;
-    //         return 0;
-    //     }
-    //     i++;
-    // }
-    // //si no existe la agrego
-    // new_env[i] = new_var;
-    // new_env[i + 1] = NULL;
+    printf("esto es new_var: %s\n", new_var);
+    i = 0;
+    while (new_env[i] != NULL) //mirar si existe ya la variable
+    {
+        if (strncmp(new_env[i], name, namelen) == 0 && new_env[i][namelen] == '=') //si existe? FUNCIONA COMPROBAO
+        {
+            free(new_env[i]); //reemplazo la existente
+            new_env[i] = new_var;
+            return 0;
+        }
+        i++;
+    }
+    printf("aquí falla?¿?¿?¿?¿\n");
+    //si no existe la agrego
+    if (add_to_env(new_var, env, i) == -1)
+    {
+        perror("add variable to env");
+        return -1;
+    }
     return 0;
 }
 
@@ -57,8 +109,8 @@ int do_export(char **args, char **env)
         i++;
     }
     name[i] = '\0';
-    printf("esto vale name: %s\n", name);
-    new_env = malloc((envlen(env) + 2) * sizeof(char *));
+    printf("esto mide env: %d\n", envlen(env));
+    new_env = malloc((envlen(env) + 1) * sizeof(char *));
     if (!new_env)
          return -1;
     i = 0;
@@ -67,7 +119,8 @@ int do_export(char **args, char **env)
         new_env[i] = ft_strdup(env[i]);
         i++;
     }
-    if (add_to_env(name, equal_sign, new_env) != 0) 
+    new_env[i] = NULL;
+    if (check_env(name, equal_sign, new_env, env) != 0) 
     {
         perror("export");
         return 1;
