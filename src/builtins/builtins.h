@@ -14,5 +14,6 @@ int do_echo(char **args);
 int do_export(char **args, char **env);
 //utils
 int envlen(char **env);
+void    free_array(char **arr);
 
 #endif

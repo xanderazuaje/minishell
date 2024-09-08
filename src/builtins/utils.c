@@ -29,3 +29,18 @@ void copy_env(char **env)
             i++;
         }
 }
+
+void	free_array(char **arr)
+{
+	int	i;
+
+	i = 0;
+	if (!arr)
+		return ;
+	while (arr[i] != NULL)
+	{
+		free(arr[i]);
+		i++;
+	}
+	free(arr);
+}

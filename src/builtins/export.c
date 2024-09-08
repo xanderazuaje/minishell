@@ -28,8 +28,8 @@ int add_to_env(char *new_var, char **env, int len)
         i++;
     }
     //*******FALTA METERLO EN EL ENV ORIGINAL PARA QUE AL HACER ENV SIGA APARECIENDO LA VARIABLE */
-	// free(copy_env);
-	// copy_env = copy_env;
+	// free_array(env); //aqui falta un free array
+	// env = copy_env;
     return 0;
 }
 
