@@ -21,13 +21,20 @@ int add_to_env(char *new_var, char **env, int len)
 	copy_env[i] = ft_strdup(new_var);
 	copy_env[i + 1] = NULL;
     i = 0;
-    //COMPROBACIÓN FUNCIONA
+    //******* SOLUCIONADO FALTA METERLO EN EL ENV ORIGINAL PARA QUE AL HACER ENV SIGA APARECIENDO LA VARIABLE */
     while (copy_env[i] != NULL)
     {
-        printf("%s\n", copy_env[i]);
+        env[i] = copy_env[i];
         i++;
     }
-    //*******FALTA METERLO EN EL ENV ORIGINAL PARA QUE AL HACER ENV SIGA APARECIENDO LA VARIABLE */
+    env[i] = NULL;
+    //COMPROBACIÓN FUNCIONA
+    i = 0;
+    while (env[i] != NULL)
+    {
+        printf("%s\n", env[i]);
+        i++;
+    }
 	// free_array(env); //aqui falta un free array
 	// env = copy_env;
     return 0;
