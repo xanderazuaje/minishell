@@ -16,4 +16,6 @@ void exec_builtin(char **args, char **env)
         do_echo(args);
     if (ft_strncmp(args[0], "export", 7) == 0)
         do_export(args, env);
+    if (ft_strncmp(args[0], "unset", 6) == 0)
+        do_unset(args, env);
 }

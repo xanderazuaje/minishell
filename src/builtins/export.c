@@ -8,20 +8,16 @@ int add_to_env(char *new_var, char **env, int len)
     i = 0;
     copy_env = malloc((len + 2) * sizeof(char *));
     if (!copy_env)
-    {
-        printf("AQUI FALLA\n");
 		return -1;
-    }
     while (i < len)
 	{
 		copy_env[i] = ft_strdup(env[i]);
 		i++;
 	}
-    printf("aquií llega?\n");
 	copy_env[i] = ft_strdup(new_var);
 	copy_env[i + 1] = NULL;
     i = 0;
-    //******* SOLUCIONADO FALTA METERLO EN EL ENV ORIGINAL PARA QUE AL HACER ENV SIGA APARECIENDO LA VARIABLE */
+    //******* SOLUCIONADO -> FALTA METERLO EN EL ENV ORIGINAL PARA QUE AL HACER ENV SIGA APARECIENDO LA VARIABLE */
     while (copy_env[i] != NULL)
     {
         env[i] = copy_env[i];
@@ -35,8 +31,6 @@ int add_to_env(char *new_var, char **env, int len)
         printf("%s\n", env[i]);
         i++;
     }
-	// free_array(env); //aqui falta un free array
-	// env = copy_env;
     return 0;
 }
 
@@ -97,7 +91,6 @@ int do_export(char **args, char **env)
     char **new_env;
     int i;
 
-    //FALLA QUE LE ESTOY PASANDO NAME COMO TODO EL STR Y TENGO QUE PASARLE SOLO HASTA EL =
     i = 0;
     equal_sign = ft_strchr(args[1], '='); //busca a ver donde está el = (a partir de ahí, se coloca)
     if (!equal_sign) 
