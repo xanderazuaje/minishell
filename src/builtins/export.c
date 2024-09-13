@@ -34,6 +34,8 @@ int add_to_env(char *new_var, char **env, int len)
     return 0;
 }
 
+//************************CUIDADO, SE PUEDE HACER EXPORT HOLA=HOLA=1 Y SE QUEDA REGISTRADO TAL CUAL */
+
 int check_env(char *name, char *value, char **new_env, char **env)
 {
     int i;
