@@ -4,8 +4,10 @@
 int check_var(char *name, char **new_env, char **env)
 {
     int i;
+    int j;
     char *new_var;
     int namelen;
+    int position;
     (void) env;
 
     i = 0;
@@ -26,6 +28,8 @@ int check_var(char *name, char **new_env, char **env)
         if (strncmp(new_env[i], name, namelen) == 0 && new_env[i][namelen + 1] == '=') //si existe? FUNCIONA COMPROBAO
         {
             free(new_env[i]); //libero la variable
+            new_env[i] = "0";
+            position = i;
             printf("borradooo jeje\n");
             break;
         }
@@ -36,18 +40,27 @@ int check_var(char *name, char **new_env, char **env)
     //es decir, si yo hago export hola=1, si hago unset hola=1 no funciona, solo funciona si hago unset hola.
 
     //CUIDADO, SE PUEDE HACER EXPORT HOLA=HOLA=1 Y SE QUEDA REGISTRADO TAL CUAL, PERO NO SE PUEDE HACER UNSET HOLA=HOLA
-    printf("falloooo?\n");
+    // printf("falloooo?\n");
+    // i = 0;
+    // //FALLA AQUÍ PORQUE NO SE PORQUE TIENE QUE COPIAR SOLO DONDE NO HAY NULOS Y CUANDO HE HECHO FREE SE HA DEBIDO BORRAR
+    // //Y CONVERTIR EN NULO Y AHORA DEJA EL HUECO Y POR ESO PETA.
+    // tengo que borrar la variable y luego subir todo pa arriba
     i = 0;
-    //FALLA AQUÍ PORQUE NO SE PORQUE TIENE QUE COPIAR SOLO DONDE NO HAY NULOS Y CUANDO HE HECHO FREE SE HA DEBIDO BORRAR
-    //Y CONVERTIR EN NULO Y AHORA DEJA EL HUECO Y POR ESO PETA.
+    j = 0;
     while (i < envlen(env))
     {
-        if (new_env[i] != NULL)
-            env[i] = new_env[i];
-        i++;
+        if (i == position)
+        {
+            printf("cucuuuuu\n");
+            i++;
+        }
+        printf("holaaaa %s\n", new_env[i]);
+        env[j] = new_env[i];
+            i++;
+            j++;
     }
     env[i] = NULL;
-    //COMPROBACIÓN
+    // //COMPROBACIÓN
     // i = 0;
     // while (env[i] != NULL)
     // {
