@@ -37,19 +37,19 @@ int check_var(char *name, char **new_env, char **env)
     return 0;
 }
 
-int do_unset(char **args, char **env)
+int builtin_unset(char *str, char **env)
 {
     char *name; //unset NAME=VALUE
     char **new_env;
     int i;
 
     i = 0;
-    name = malloc((ft_strlen(args[1]) + 1) * sizeof(char *)); //incluye la longitud de name + 1
+    name = malloc((ft_strlen(str) + 1) * sizeof(char *)); //incluye la longitud de name + 1
     if (!name)
         return -1;
-    while (args[1][i] != '\0')
+    while (str[i] != '\0')
     {
-        name[i] = args[1][i];
+        name[i] = str[i];
         i++;
     }
     name[i] = '\0';
@@ -68,6 +68,19 @@ int do_unset(char **args, char **env)
     {
         perror("unset");
         return 1;
+    }
+    return 0;
+}
+
+int do_unset(char **args, char **env)
+{
+    int num;
+
+    num = 1;
+    while (args[num] != NULL && num > 0)
+    {
+        builtin_unset(args[num], env);
+        num++;
     }
     return 0;
 }
