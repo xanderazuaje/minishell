@@ -1,8 +1,38 @@
 #include "builtins.h"
 
-// //char *remove_quotes()
+int go_there(char **args, char **env)
+{
 
-int update_old_pwd(char **args, char **env)
+}
+
+int go_back(char **env)
+{
+    
+}
+
+int go_home(char **env)
+{
+    char *path;
+    char *home;
+
+    path = getcwd(NULL, 0);
+    home = getenv("HOME");
+    if (!home)
+        return (perror("HOME not set"), 1);
+    if (!chdir(home))
+        return (perror("home"), 1);
+    if (!update_old_pwd(env)) //aquí actualizo el OLDPWD
+        return (perror("update_old_pwd() error"), 1);
+    printf("esto es el path guardao\n", path);
+    path = getcwd(NULL, 0);
+    if (!path)
+        return (perror("getcwd() error"), 1);
+    //aquí hay que cambiar PWD igual que update_old_pwd
+    free(home);
+    return 0;
+}
+
+int update_old_pwd(char **env)
 {
     int i;
     char *actualpath;
@@ -25,37 +55,15 @@ int update_old_pwd(char **args, char **env)
     }
     new_env[i - 1] = ft_strjoin("OLDPWD=", actualpath);
     new_env[i] = NULL;
-    (void) args;
     return 0;
-}
-
-int path(char **args, char **env)
-{
-    char *temp = NULL;
-
-    //Si retrocedo, que me lleve a la ruta guardada en OLDPWD (que es la anterior en la que estuve)
-    if (!strncmp(temp, "-", 2))
-    {
-        chdir(getenv("OLDPWD"));
-        return 0;
-    }
-    if (!chdir(temp))
-        perror("No such file or directory!");
-    else
-    {
-        free(temp);
-        update_old_pwd(args, env);
-        return 0;
-    }
-    free(temp);
-    (void) args;
-    return 1;
 }
 
 void do_cd(char **args, char **env)
 {
-    (void) args;
-    (void) env;
-    //si no hay argumentos entonces (go home)
-    //si hay 1 argumento entonces (go there)
+    if (args[1] == NULL)
+        return (go_home(env));
+    else if (strncmp(args[1], "-", 2) == 0)
+        return (go_back(env));
+    else
+        return (go_there(args, env));
 }

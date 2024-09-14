@@ -79,10 +79,7 @@ int check_env(char *name, char *value, char **new_env, char **env)
     printf("aquí falla?¿?¿?¿?¿\n");
     //si no existe la agrego
     if (add_to_env(new_var, env, i) == -1)
-    {
-        perror("add variable to env");
-        return -1;
-    }
+        return (perror("export"), 1);
     return 0;
 }
 
@@ -123,10 +120,7 @@ int builtin_export(char *str, char **env)
     }
     new_env[i] = NULL;
     if (check_env(name, equal_sign, new_env, env) != 0) 
-    {
-        perror("export");
-        return 1;
-    }
+        return (perror("export2"), 1);
     return 0;
 }
 

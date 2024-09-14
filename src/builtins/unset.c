@@ -64,10 +64,7 @@ int builtin_unset(char *str, char **env)
     new_env[i] = NULL;
     printf("hola aquí llego\n");
     if (check_var(name, new_env, env) != 0) 
-    {
-        perror("unset");
-        return 1;
-    }
+        return (perror("unset"), 1);
     return 0;
 }
 
