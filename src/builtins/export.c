@@ -1,6 +1,5 @@
 #include "builtins.h"
 
-//FALTA QUE SE PUEDA HACER CON VARIOS COMANDOS A LA VEZ (UNSET HOLA ADIOS BORRA HOLA Y ADIOS)
 int add_to_env(char *new_var, char **env, int len)
 {
 	int		i;
@@ -87,7 +86,7 @@ int check_env(char *name, char *value, char **new_env, char **env)
     return 0;
 }
 
-int do_export(char **args, char **env) 
+int builtin_export(char *str, char **env) 
 {
     char *equal_sign;
     char *name; //export NAME=VALUE
@@ -95,20 +94,20 @@ int do_export(char **args, char **env)
     int i;
 
     i = 0;
-    equal_sign = ft_strchr(args[1], '='); //busca a ver donde está el = (a partir de ahí, se coloca)
+    equal_sign = ft_strchr(str, '='); //busca a ver donde está el = (a partir de ahí, se coloca)
     if (!equal_sign) 
     {
         perror("export: not a valid identifier");
         return 1;
     }
     printf("equal sign: %s\n", equal_sign); //AQUI SACO =VALUE O LO QUE VA DETRÁS DEL NAME
-    printf("esto ocupa name: %zu\n", len_to_char(args[1], '=') - 1);
-    name = malloc(len_to_char(args[1], '=') * sizeof(char *)); //incluye la longitud de name + 1
+    printf("esto ocupa name: %zu\n", len_to_char(str, '=') - 1);
+    name = malloc(len_to_char(str, '=') * sizeof(char *)); //incluye la longitud de name + 1
     if (!name)
         return -1;
-    while (args[1][i] != '=')
+    while (str[i] != '=')
     {
-        name[i] = args[1][i];
+        name[i] = str[i];
         i++;
     }
     name[i] = '\0';
@@ -127,6 +126,19 @@ int do_export(char **args, char **env)
     {
         perror("export");
         return 1;
+    }
+    return 0;
+}
+
+int do_export(char **args, char **env)
+{
+    int num;
+
+    num = 1;
+    while (args[num] != NULL && num > 0)
+    {
+        builtin_export(args[num], env);
+        num++;
     }
     return 0;
 }
