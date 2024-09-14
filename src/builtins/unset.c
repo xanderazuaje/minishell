@@ -80,3 +80,16 @@ int do_unset(char **args, char **env)
     }
     return 0;
 }
+
+int do_unset(char **args, char **env)
+{
+    int num;
+
+    num = 1;
+    while (args[num] != NULL && num > 0)
+    {
+        builtin_unset(args[num], env);
+        num++;
+    }
+    return 0;
+}
