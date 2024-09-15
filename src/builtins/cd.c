@@ -1,6 +1,7 @@
 #include "builtins.h"
 
 //  RUTA ABSOLUTAAAA?
+//FALLA GETENV PORQUE TENGO QUE MANDARLE EL ENV MIOOOOOO PUTAAAAAAAAA
 
 int update_old_pwd(char **env)
 {
@@ -114,7 +115,7 @@ int go_there(char **args, char **env)
 
 int go_back(char **env)
 {
-    char *oldpwd = getenv("OLDPWD");
+    char *oldpwd = getenv("OLDPWD"); //CAMBIAR ESSTOOO
 
     if (!oldpwd)
         return (perror("OLDPWD not set"), 1);
@@ -127,7 +128,7 @@ int go_back(char **env)
     
     if (update_pwd(env) != 0) //actualiza PWD
         return (perror("update_pwd() error"), 1);
-        
+
     do_pwd();
 
     return 0;
@@ -158,7 +159,7 @@ int do_cd(char **args, char **env)
 {
     if (args[1] == NULL)
         return (go_home(env));
-    else if (strncmp(args[1], "--", 2) == 0)
+    else if (strncmp(args[1], "-", 1) == 0)
         return (go_back(env));
     else
         return (go_there(args, env));
