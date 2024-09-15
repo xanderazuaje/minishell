@@ -100,11 +100,11 @@ int go_there(char **args, char **env)
 {
     char *path = args[1];
 
-    if (chdir(path) != 0) //cambia a la ruta especificada
-        return (perror("chdir"), 1);
-
     if (update_old_pwd(env) != 0) //actualiza OLDPWD
         return (perror("update_old_pwd() error"), 1);
+
+    if (chdir(path) != 0) //cambia a la ruta especificada
+        return (perror("chdir"), 1);
 
     if (update_pwd(env) != 0) //actualiza PWD
         return (perror("update_pwd() error"), 1);
@@ -119,16 +119,17 @@ int go_back(char **env)
     if (!oldpwd)
         return (perror("OLDPWD not set"), 1);
 
-    if (chdir(oldpwd) != 0) //cambia al directorio anterior
-        return (perror("chdir to OLDPWD"), 1);
-
     if (update_old_pwd(env) != 0) //actualiza OLDPWD
         return (perror("update_old_pwd() error"), 1);
-
+    
+    if (chdir(oldpwd) != 0) //cambia al directorio anterior
+        return (perror("chdir to OLDPWD"), 1);
+    
     if (update_pwd(env) != 0) //actualiza PWD
         return (perror("update_pwd() error"), 1);
+        
+    do_pwd();
 
-    printf("%s\n", oldpwd); //imprime OLDPWD como en bash
     return 0;
 }
 
@@ -140,11 +141,11 @@ int go_home(char **env)
     if (!home)
         return (perror("HOME not set"), 1);
 
-    if (chdir(home) != 0)
-        return (perror("chdir to home"), 1);
-
     if (update_old_pwd(env) != 0)
         return (perror("update_old_pwd() error"), 1);
+
+    if (chdir(home) != 0)
+        return (perror("chdir to home"), 1);
     
     if (update_pwd(env) != 0)
         return (perror("update_pwd() error"), 1);
@@ -157,7 +158,7 @@ int do_cd(char **args, char **env)
 {
     if (args[1] == NULL)
         return (go_home(env));
-    else if (strncmp(args[1], "-", 2) == 0)
+    else if (strncmp(args[1], "--", 2) == 0)
         return (go_back(env));
     else
         return (go_there(args, env));
