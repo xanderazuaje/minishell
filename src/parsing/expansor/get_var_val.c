@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_var_val.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
+/*   By: mhiguera <mhiguera@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 00:49:53 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/07/09 18:03:51 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2024/10/02 19:27:59 by mhiguera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,12 @@ char	*get_var_val(const char *str, char **env, int exit_status)
 	if (*(str + 1) == '?')
 		return (ft_itoa(exit_status));
 	var = NULL;
+	printf("*env: %s\n", *env);
 	while (*env && !start_with(*env, str + 1))
 		env++;
 	if (!*env)
 		return (NULL);
+	printf("hola llego aquí acaso?\n");
 	var = *env;
 	while (*var != '=')
 	{

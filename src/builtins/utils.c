@@ -14,7 +14,7 @@ int envlen(char **env)
 }
 
 //para crear un nuevo env copia
-void copy_env(char **env)
+char **copy_env(char **env)
 {
     int i;
     char **new_env;
@@ -22,12 +22,22 @@ void copy_env(char **env)
     i = 0;
     new_env = malloc((envlen(env) + 2) * sizeof(char *));
     if (!new_env)
-        return ;
-        while (env[i] != NULL)
+        return NULL;
+    while (env[i] != NULL)
+    {
+        new_env[i] = strdup(env[i]);  // Duplica cada cadena
+        if (!new_env[i])  // Verifica si hubo error en strdup
         {
-            new_env[i] = env[i];
-            i++;
+            // Liberar las anteriores cadenas duplicadas en caso de error
+            while (i-- > 0)
+                free(new_env[i]);
+            free(new_env);
+            return NULL;
         }
+        i++;
+    }
+    new_env[i] = NULL;  // Termina la lista de cadenas con NULL
+    return new_env;
 }
 
 void	free_array(char **arr)
@@ -43,4 +53,16 @@ void	free_array(char **arr)
 		i++;
 	}
 	free(arr);
+}
+
+void printenv(char **envcopy)
+{
+    int i;
+
+    i = 0;
+    while (envcopy[i])
+    {
+        printf("%s\n", envcopy[i]);
+        i++;
+    }
 }
