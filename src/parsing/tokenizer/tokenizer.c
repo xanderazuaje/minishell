@@ -37,6 +37,8 @@ void	get_flag_state(const t_cmdlist *cmdlist, t_flags *prev, t_flags *curr)
 		*curr = file_name;
 	else if ((*prev) == here_document)
 		*curr = here_document_limit;
+	else if ((*prev) == here_document_limit)
+		*curr = argument;
 }
 
 void	tokenizer(t_cmdlist *cmdlist)

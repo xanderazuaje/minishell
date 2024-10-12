@@ -28,6 +28,6 @@ int		count_args(const t_cmdlist *list);
 void	here_doc(t_cmdlist *list, char **env, int pipe_fd[2], char **line);
 void	assign_hdocs(t_cmdlist *list, int *hdoc_pipes, char **env);
 char	*expand_path(const char *program, char **env);
-int		set_redirections(t_cmdlist *list, const int *hdoc_pipes, const int i, char **env);
+void	set_redirections(t_cmdlist *list, const int *hdoc_pipes, const int i, char **env);
 
 #endif
