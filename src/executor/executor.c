@@ -6,7 +6,7 @@
 /*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 12:48:42 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/10/12 08:01:18 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2024/10/12 08:06:38 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,10 @@ void execute_it(char **env, char **arg_list, char *cmd)
 	else
 	{
 		if (arg_list[0] != NULL)
+		{
 			write(2,  arg_list[0], strlen(arg_list[0]));
-		write(2,  ": command not found\n", 20);
+			write(2,  ": command not found\n", 20);
+		}
 		exit(127);
 	}
 }
@@ -166,7 +168,7 @@ void	executor(t_cmdlist *list, char **env)
 	{
 		if (next_cmd(list))
 			pipe(pipes_fd[0]);
-		command.arg_list = set_cmd_args(list, env, &(command.cmd));
+		command.arg_list = set_cmd_args(list, env, &command.cmd);
 		if (cmd_count ==  1 && is_builtin(command.arg_list))
 		{
 			saved_stdout = dup(STDOUT_FILENO);
@@ -207,6 +209,5 @@ void	executor(t_cmdlist *list, char **env)
 	if (cmd_count > 1)
 		close(pipes_fd[1][RD_PIPE]);
 	wait_children();
-	/*last*/
 	free(hdoc_pipes);
 }
