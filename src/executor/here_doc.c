@@ -6,7 +6,7 @@
 /*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 14:32:16 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/07/15 20:21:35 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2024/10/12 07:23:18 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	here_doc(t_cmdlist *list, char **env, int pipe_fd[2], char **line)
 			hdoc_eof_error(count, limit);
 			break ;
 		}
-		if (ft_strncmp(*line, limit, ft_strlen(limit)) == 0)
+		if (ft_strncmp(*line, limit, ft_strlen(limit) + 1) == 0)
 			break ;
 		if (ft_strchr(*line, '$') && must_expand(list->next->word))
 			*line = expand_hdoc(*line, env);
