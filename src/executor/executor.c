@@ -3,6 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
+/*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/11 12:48:42 by xazuaje-          #+#    #+#             */
+/*   Updated: 2024/10/12 08:01:18 by xazuaje-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   executor.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
 /*   By: mhiguera <mhiguera@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 23:27:02 by xazuaje-          #+#    #+#             */
@@ -144,6 +156,7 @@ void	executor(t_cmdlist *list, char **env)
 	int		i;
 	int		pipes_fd[2][2];
 	int		cmd_count;
+	int		saved_stdout;
 
 	i = 0;
 	cmd_count = count_processes(list);
@@ -154,18 +167,21 @@ void	executor(t_cmdlist *list, char **env)
 		if (next_cmd(list))
 			pipe(pipes_fd[0]);
 		command.arg_list = set_cmd_args(list, env, &(command.cmd));
+		if (cmd_count ==  1 && is_builtin(command.arg_list))
+		{
+			saved_stdout = dup(STDOUT_FILENO);
+			set_redirections(list, hdoc_pipes, i, env);
+		}
 		if (cmd_count > 1 || !is_builtin(command.arg_list))
 		{
 			if (fork() == 0)
 			{
 				set_pipes(list, i, pipes_fd);
-				if (set_redirections(list, hdoc_pipes, i, env))
-				{
-					if (is_builtin(command.arg_list))
-						exec_builtin(command.arg_list, env);
-					else
-						execute_it(env, command.arg_list, command.cmd);
-				}
+				set_redirections(list, hdoc_pipes, i, env);
+				if (is_builtin(command.arg_list))
+					exec_builtin(command.arg_list, env);
+				else
+					execute_it(env, command.arg_list, command.cmd);
 				exit(1);
 			}
 			if (cmd_count > 1)
@@ -176,7 +192,11 @@ void	executor(t_cmdlist *list, char **env)
 			}
 		}
 		else if (is_builtin(command.arg_list))
+		{
 			exec_builtin(command.arg_list, env);
+			dup2(saved_stdout, STDOUT_FILENO);
+			close(saved_stdout);
+		}
 		close(hdoc_pipes[i]);
 		free(command.cmd);
 		command.cmd = NULL;

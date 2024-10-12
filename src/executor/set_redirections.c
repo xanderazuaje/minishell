@@ -6,7 +6,7 @@
 /*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 06:57:04 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/07/15 19:49:28 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2024/10/12 07:50:32 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ int	set_outfile(t_cmdlist *list, int *fd, char **env)
 	if (dup2(*fd, STDOUT_FILENO) < 0)
 		perror(file_name);
 	close(*fd);
-	free(file_name);
 	free(var_name);
 	return (1);
 }
@@ -88,7 +87,6 @@ int	set_append_outfile(t_cmdlist *list, int *fd, char **env)
 	if (dup2(*fd, STDOUT_FILENO) < 0)
 		perror(file_name);
 	close(*fd);
-	free(file_name);
 	return (1);
 }
 
@@ -106,23 +104,19 @@ int	set_hdoc(const int *hdoc_pipes, const int i)
 int	set_redirections(t_cmdlist *list, const int *hdoc_pipes, const int i, char **env)
 {
 	int	fd;
-	int	value;
 
+	fd = -1;
 	while (list && list->flags != pipe_flag)
 	{
 		if (list->flags == infile)
-			value = set_infile(list, &fd, env);
+			set_infile(list, &fd, env);
 		else if (list->flags == here_document)
-			value = set_hdoc(hdoc_pipes, i);
+			set_hdoc(hdoc_pipes, i);
 		else if (list->flags == outfile)
-			value = set_outfile(list, &fd, env);
+			set_outfile(list, &fd, env);
 		else if (list->flags == append_outfile)
-			value = set_append_outfile(list, &fd, env);
-		else
-			value = 1;
-		if (value == 0)
-			return (0);
+			set_append_outfile(list, &fd, env);
 		list = list->next;
 	}
-	return (1);
+	return (fd);
 }
