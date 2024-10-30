@@ -6,7 +6,7 @@
 /*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 15:21:38 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/06/30 20:43:55 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2024/10/30 21:54:10 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	syntax_error(char c)
 {
-	write(2, "syntax error near unexpected token '", 36);
+	write(2, "syntax error near unexpected token ", 36);
 	if (c == '\0')
 		write(2, "newline", 7);
 	else
@@ -22,20 +22,23 @@ void	syntax_error(char c)
 	write(2, "'\n", 2);
 }
 
-t_states	check_states(const char *str, const t_states *prev)
+t_states	check_states(const char *str, const t_states *prev, char *prev_q)
 {
 	t_states	curr;
 
-	if ((*str == '&' || *str == '\\' || *str == ';') && (*prev) != quotes)
+	if ((*str == '&' || *str == '\\' || *str == ';') && *prev != quotes)
 		curr = error;
 	else if (*str == '<' || *str == '>')
 		curr = redirection;
-	else if (*str == '"' || *str == '\'')
+	else if ((*str == '"' || *str == '\'') && (*prev_q != '\0' && *str == *prev_q))
 	{
-		if ((*prev) == quotes)
+		if (*prev == quotes)
 			curr = end_of_quote;
 		else
+		{
+			*prev_q = *str;
 			curr = quotes;
+		}
 	}
 	else if (*str == '|')
 		curr = pipes;
@@ -50,13 +53,15 @@ int	check_input(char *str)
 {
 	t_states	prev;
 	t_states	curr;
+	char		prev_q;
 
 	prev = initial;
+	prev_q = '\0';
 	while (1)
 	{
 		while (*str == ' ')
 			str++;
-		curr = check_states(str, &prev);
+		curr = check_states(str, &prev, &prev_q);
 		curr = get_state(prev, curr);
 		if (curr == error)
 		{
