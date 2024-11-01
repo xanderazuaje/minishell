@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include <stdlib.h>
 
 #include "lexer.h"
@@ -77,10 +78,7 @@ int	check_input(char *str)
 			if (prev == quotes)
 				write(2, "syntax error: unclosed quote\n", 30);
 			else
-			{
 				syntax_error(*str);
-				free(str);
-			}
 			return (0);
 		}
 		if (curr == last)

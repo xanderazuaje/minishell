@@ -50,5 +50,6 @@ int main(int argc, char **argv, char **env)
 		cmds = parse_str(line, env);
 		executor(cmds, &env);
 		free_cmd(cmds);
+		free(line);
 	}
 }

@@ -65,7 +65,7 @@ char	*expand_var(char *str, char **env, int exit_status)
 
 	local[0] = (char *) 1;
 	local[1] = (char *) 1;
-	last = str;
+	last = ft_strdup(str);
 	temp = NULL;
 	while (last)
 	{
