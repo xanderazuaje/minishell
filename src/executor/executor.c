@@ -151,7 +151,7 @@ int is_builtin(char **arg_list)
 	return (0);
 }
 
-void	executor(t_cmdlist *list, char **env)
+void	executor(t_cmdlist *list, char ***env)
 {
 	t_cmd	command;
 	int		*hdoc_pipes;
@@ -162,28 +162,28 @@ void	executor(t_cmdlist *list, char **env)
 
 	i = 0;
 	cmd_count = count_processes(list);
-	set_hdocs(list, env, &hdoc_pipes);
+	set_hdocs(list, *env, &hdoc_pipes);
 	command.cmd = NULL;
 	while (list)
 	{
 		if (next_cmd(list))
 			pipe(pipes_fd[0]);
-		command.arg_list = set_cmd_args(list, env, &command.cmd);
+		command.arg_list = set_cmd_args(list, *env, &command.cmd);
 		if (cmd_count ==  1 && is_builtin(command.arg_list))
 		{
 			saved_stdout = dup(STDOUT_FILENO);
-			set_redirections(list, hdoc_pipes, i, env);
+			set_redirections(list, hdoc_pipes, i, *env);
 		}
 		if (cmd_count > 1 || !is_builtin(command.arg_list))
 		{
 			if (fork() == 0)
 			{
 				set_pipes(list, i, pipes_fd);
-				set_redirections(list, hdoc_pipes, i, env);
+				set_redirections(list, hdoc_pipes, i, *env);
 				if (is_builtin(command.arg_list))
 					exec_builtin(command.arg_list, env);
 				else
-					execute_it(env, command.arg_list, command.cmd);
+					execute_it(*env, command.arg_list, command.cmd);
 				exit(1);
 			}
 			if (cmd_count > 1)

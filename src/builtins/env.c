@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   env.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/30 20:51:54 by xazuaje-          #+#    #+#             */
+/*   Updated: 2024/10/31 16:56:07 by xazuaje-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "builtins.h"
 
 void do_env(char **envp)
@@ -5,10 +17,9 @@ void do_env(char **envp)
     int i;
 
     i = 0;
-    printf("ESTOY EN ENV\n");
     while (envp[i] != NULL)
     {
-        printf("%s\n", envp[i]);
+        ft_putendl_fd(envp[i], 1);
         i++;
     }
 }

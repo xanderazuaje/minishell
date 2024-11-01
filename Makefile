@@ -25,6 +25,7 @@ SRC_FILES := $(SRC_DIR)/main.c \
 	$(SRC_DIR)/feature_test/test_splitted.c \
 	$(SRC_DIR)/feature_test/test_lexer.c \
 	$(SRC_DIR)/globals/prev_exit_status.c \
+	$(SRC_DIR)/parsing/environment.c \
 	$(SRC_DIR)/parsing/parse_str.c \
 	$(SRC_DIR)/parsing/split_sh/split_sh.c \
 	$(SRC_DIR)/parsing/split_sh/cmd_func.c \

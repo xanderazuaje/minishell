@@ -13,5 +13,5 @@
 #ifndef EXECUTOR_H
 # define EXECUTOR_H
 
-void	executor(t_cmdlist *list, char **env);
+void	executor(t_cmdlist *list, char ***env);
 #endif

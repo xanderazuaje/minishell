@@ -6,9 +6,11 @@
 /*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 15:21:38 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/10/30 21:54:10 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2024/11/01 10:37:36 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <stdlib.h>
 
 #include "lexer.h"
 
@@ -30,10 +32,17 @@ t_states	check_states(const char *str, const t_states *prev, char *prev_q)
 		curr = error;
 	else if (*str == '<' || *str == '>')
 		curr = redirection;
-	else if ((*str == '"' || *str == '\'') && (*prev_q != '\0' && *str == *prev_q))
+	else if (*str == '"' || *str == '\'')
 	{
-		if (*prev == quotes)
+		if (*prev == quotes && *str == *prev_q)
+		{
 			curr = end_of_quote;
+			*prev_q = '\0';
+		}
+		else if (*prev == quotes)
+		{
+			curr = any_character;
+		}
 		else
 		{
 			*prev_q = *str;
@@ -68,7 +77,10 @@ int	check_input(char *str)
 			if (prev == quotes)
 				write(2, "syntax error: unclosed quote\n", 30);
 			else
+			{
 				syntax_error(*str);
+				free(str);
+			}
 			return (0);
 		}
 		if (curr == last)

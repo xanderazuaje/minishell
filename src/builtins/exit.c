@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exit.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/30 20:51:54 by xazuaje-          #+#    #+#             */
+/*   Updated: 2024/10/31 17:39:46 by xazuaje-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "builtins.h"
 
-void do_exit(char **args)
+void do_exit(char **args, char ***env)
 {
     int exit_status = prev_exit_status(0);
 
@@ -16,7 +28,7 @@ void do_exit(char **args)
         else
             exit_status = status;
     }
+    freeenv(env);
     prev_exit_status(exit_status);
-    printf("tonto el que lo lea <3\n");
     exit(exit_status);
 }

@@ -21,7 +21,7 @@
 # include <sys/wait.h>
 # include "../minishell.h"
 
-void	executor(t_cmdlist *list, char **env);
+void	executor(t_cmdlist *list, char ***env);
 char	*expand_hdoc(char *str, char **env);
 int		count_processes(const t_cmdlist *list);
 int		count_args(const t_cmdlist *list);

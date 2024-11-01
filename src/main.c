@@ -3,6 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
+/*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/30 20:51:54 by xazuaje-          #+#    #+#             */
+/*   Updated: 2024/10/31 16:54:25 by xazuaje-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
 /*   By: mhiguera <mhiguera@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 21:49:39 by xazuaje-          #+#    #+#             */
@@ -19,8 +31,8 @@ int main(int argc, char **argv, char **env)
 	int exit_status;
 	t_cmdlist *cmds;
 
-	(void) env;
 	exit_status = 0;
+	env = envcopy(env);
 	(void ) argc;
 	(void ) argv;
 	init_signals();
@@ -32,12 +44,11 @@ int main(int argc, char **argv, char **env)
 		if (!line)
 		{
 			free(line);
+			freeenv(&env);
 			exit(exit_status);
 		}
 		cmds = parse_str(line, env);
-		if (!cmds)
-			continue ;
-		executor(cmds, env);
+		executor(cmds, &env);
 		free_cmd(cmds);
 	}
 }

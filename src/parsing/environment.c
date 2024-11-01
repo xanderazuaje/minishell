@@ -1,27 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   start_with.c                                       :+:      :+:    :+:   */
+/*   environment.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/12 00:46:04 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/10/31 14:15:17 by xazuaje-         ###   ########.fr       */
+/*   Created: 2024/10/31 14:37:46 by xazuaje-          #+#    #+#             */
+/*   Updated: 2024/10/31 14:43:38 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+//
+// Created by xander on 10/31/24.
+//
+#include "parser.h"
 
-int	start_with(const char *str, const char *find)
+char **envcopy(char **env)
 {
-	while (*str && *find)
+	char **newenv;
+	size_t len;
+
+	len = 0;
+	while (env[len++]){}
+	newenv = malloc(sizeof(char *) * len);
+	len = 0;
+	while (env[len])
 	{
-		if (*str != *find)
-			return (0);
-		str++;
-		find++;
+		newenv[len] = ft_strdup(env[len]);
+		len++;
 	}
-	if (!*find && (*str == '=' || *str == '\0'))
-		return (1);
-	return (0);
+	newenv[len] = NULL;
+	return newenv;
+}
+
+void freeenv(char ***env)
+{
+	size_t i;
+	i = 0;
+	while ((*env)[i])
+	{
+		free((*env)[i]);
+		i++;
+	}
+	free(*env);
 }
