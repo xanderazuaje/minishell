@@ -6,7 +6,7 @@
 /*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 15:21:38 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/11/01 10:37:36 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2024/11/03 10:16:10 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,25 @@ void	syntax_error(char c)
 	write(2, "'\n", 2);
 }
 
+void	check_quotes_state(const char *s, const t_states *p, char *pq,
+	t_states *c)
+{
+	if (*p == quotes && *s == *pq)
+	{
+		*c = end_of_quote;
+		*pq = '\0';
+	}
+	else if (*p == quotes)
+	{
+		*c = any_character;
+	}
+	else
+	{
+		*pq = *s;
+		*c = quotes;
+	}
+}
+
 t_states	check_states(const char *str, const t_states *prev, char *prev_q)
 {
 	t_states	curr;
@@ -35,20 +54,7 @@ t_states	check_states(const char *str, const t_states *prev, char *prev_q)
 		curr = redirection;
 	else if (*str == '"' || *str == '\'')
 	{
-		if (*prev == quotes && *str == *prev_q)
-		{
-			curr = end_of_quote;
-			*prev_q = '\0';
-		}
-		else if (*prev == quotes)
-		{
-			curr = any_character;
-		}
-		else
-		{
-			*prev_q = *str;
-			curr = quotes;
-		}
+		check_quotes_state(str, prev, prev_q, &curr);
 	}
 	else if (*str == '|')
 		curr = pipes;

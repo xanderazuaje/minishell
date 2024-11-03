@@ -6,7 +6,7 @@
 /*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 20:51:54 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/10/31 16:54:25 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2024/11/03 10:25:55 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@
 #include <sys/wait.h>
 #include "minishell.h"
 
-int main(int argc, char **argv, char **env)
+int	main(int argc, char **argv, char **env)
 {
-	char *line;
-	int exit_status;
-	t_cmdlist *cmds;
+	char		*line;
+	int			exit_status;
+	t_cmdlist	*cmds;
 
 	exit_status = 0;
 	env = envcopy(env);

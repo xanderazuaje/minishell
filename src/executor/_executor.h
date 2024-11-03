@@ -6,7 +6,7 @@
 /*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 23:48:35 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/07/15 19:57:21 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2024/11/03 10:24:34 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,23 @@
 # include <sys/wait.h>
 # include "../minishell.h"
 
-void	executor(t_cmdlist *list, char ***env);
-char	*expand_hdoc(char *str, char **env);
-int		count_processes(const t_cmdlist *list);
-int		count_args(const t_cmdlist *list);
-void	here_doc(t_cmdlist *list, char **env, int pipe_fd[2], char **line);
-void	assign_hdocs(t_cmdlist *list, int *hdoc_pipes, char **env);
-char	*expand_path(const char *program, char **env);
-void	set_redirections(t_cmdlist *list, const int *hdoc_pipes, const int i, char **env);
+void		executor(t_cmdlist *list, char ***env);
+char		*expand_hdoc(char *str, char **env);
+int			count_processes(const t_cmdlist *list);
+int			count_args(const t_cmdlist *list);
+void		here_doc(t_cmdlist *list, char **env, int pipe_fd[2], char **line);
+void		assign_hdocs(t_cmdlist *list, int *hdoc_pipes, char **env);
+char		*expand_path(const char *program, char **env);
+void		set_redirections(t_cmdlist *l, const int *hdp, int i, char **env);
+t_cmdlist	*next_cmd(t_cmdlist *list);
+void		wait_children(void);
+void		set_pipes(t_cmdlist *list, int i, int pipes_fd[2][2]);
+int			is_builtin(char **arg_list);
+void		child_process(t_cmdlist *list, char ***env, t_cmd c, t_exec *e);
+void		pipe_cmd(t_cmdlist *list, char ***env, t_cmd c, t_exec *e);
+void		execute_it(char **env, char **arg_list, char *cmd);
+void		separate_process(t_cmdlist *list, char ***env, t_cmd *c, t_exec *e);
+char		**set_cmd_args(t_cmdlist *list, char **env, char **cmd);
+void		do_process(t_cmdlist *list, char ***env, t_cmd c, t_exec *e);
 
 #endif

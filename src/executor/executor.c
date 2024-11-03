@@ -6,19 +6,7 @@
 /*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 12:48:42 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/10/12 08:06:38 by xazuaje-         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   executor.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mhiguera <mhiguera@student.42madrid.com    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/27 23:27:02 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/09/10 19:05:30 by mhiguera         ###   ########.fr       */
+/*   Updated: 2024/11/03 10:17:03 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +22,7 @@ void	set_hdocs(t_cmdlist *list, char **env, int **hdoc_pipes)
 	assign_hdocs(list, *hdoc_pipes, env);
 }
 
-char **set_cmd_args(t_cmdlist *list, char **env, char **cmd)
+char	**set_cmd_args(t_cmdlist *list, char **env, char **cmd)
 {
 	int		i;
 	int		count;
@@ -42,7 +30,7 @@ char **set_cmd_args(t_cmdlist *list, char **env, char **cmd)
 
 	i = 0;
 	count = count_args(list);
-	arg_list = (char **) safe_malloc((count + 1) * sizeof(char*));
+	arg_list = (char **)safe_malloc((count + 1) * sizeof (char *));
 	while (list && list->flags != pipe_flag)
 	{
 		if (list->flags == argument || list->flags == command)
@@ -58,7 +46,7 @@ char **set_cmd_args(t_cmdlist *list, char **env, char **cmd)
 	return (arg_list);
 }
 
-void execute_it(char **env, char **arg_list, char *cmd)
+void	execute_it(char **env, char **arg_list, char *cmd)
 {
 	if (cmd != NULL)
 	{
@@ -72,63 +60,14 @@ void execute_it(char **env, char **arg_list, char *cmd)
 	{
 		if (arg_list[0] != NULL)
 		{
-			write(2,  arg_list[0], strlen(arg_list[0]));
-			write(2,  ": command not found\n", 20);
+			write(2, arg_list[0], strlen(arg_list[0]));
+			write(2, ": command not found\n", 20);
 		}
 		exit(127);
 	}
 }
 
-
-t_cmdlist *next_cmd(t_cmdlist *list)
-{
-	while (list)
-	{
-		if (list->flags == pipe_flag)
-			return (list->next);
-		list = list->next;
-	}
-	return (list);
-}
-
-void wait_children()
-{
-	int		exit_status;
-
-	while (waitpid(-1, &exit_status, 0) != -1)
-	{}
-	prev_exit_status(exit_status);
-}
-
-void set_pipes(t_cmdlist *list, int i, int pipes_fd[2][2])
-{
-	if (i > 0 || next_cmd(list))
-	{
-		if (i == 0)
-		{
-			dup2(pipes_fd[0][WR_PIPE], STDOUT_FILENO);
-			close(pipes_fd[0][WR_PIPE]);
-			close(pipes_fd[0][RD_PIPE]);
-		}
-		else if (next_cmd(list) == NULL)
-		{
-			dup2(pipes_fd[1][RD_PIPE], STDIN_FILENO);
-			close(pipes_fd[1][WR_PIPE]);
-			close(pipes_fd[1][RD_PIPE]);
-		}
-		else
-		{
-			dup2(pipes_fd[0][WR_PIPE], STDOUT_FILENO);
-			close(pipes_fd[0][WR_PIPE]);
-			close(pipes_fd[0][RD_PIPE]);
-			dup2(pipes_fd[1][RD_PIPE], STDIN_FILENO);
-			close(pipes_fd[1][WR_PIPE]);
-			close(pipes_fd[1][RD_PIPE]);
-		}
-	}
-}
-
-int is_builtin(char **arg_list)
+int	is_builtin(char **arg_list)
 {
 	if (arg_list && arg_list[0])
 	{
@@ -154,60 +93,25 @@ int is_builtin(char **arg_list)
 void	executor(t_cmdlist *list, char ***env)
 {
 	t_cmd	command;
-	int		*hdoc_pipes;
-	int		i;
-	int		pipes_fd[2][2];
-	int		cmd_count;
-	int		saved_stdout;
+	t_exec	exec;
 
-	i = 0;
-	cmd_count = count_processes(list);
-	set_hdocs(list, *env, &hdoc_pipes);
+	exec.i = 0;
+	exec.cmd_count = count_processes(list);
+	set_hdocs(list, *env, &exec.hdoc_pipes);
 	command.cmd = NULL;
 	while (list)
 	{
-		if (next_cmd(list))
-			pipe(pipes_fd[0]);
-		command.arg_list = set_cmd_args(list, *env, &command.cmd);
-		if (cmd_count ==  1 && is_builtin(command.arg_list))
-		{
-			saved_stdout = dup(STDOUT_FILENO);
-			set_redirections(list, hdoc_pipes, i, *env);
-		}
-		if (cmd_count > 1 || !is_builtin(command.arg_list))
-		{
-			if (fork() == 0)
-			{
-				set_pipes(list, i, pipes_fd);
-				set_redirections(list, hdoc_pipes, i, *env);
-				if (is_builtin(command.arg_list))
-					exec_builtin(command.arg_list, env);
-				else
-					execute_it(*env, command.arg_list, command.cmd);
-				exit(1);
-			}
-			if (cmd_count > 1)
-			{
-				close(pipes_fd[0][WR_PIPE]);
-				pipes_fd[1][WR_PIPE] = pipes_fd[0][WR_PIPE];
-				pipes_fd[1][RD_PIPE] = pipes_fd[0][RD_PIPE];
-			}
-		}
-		else if (is_builtin(command.arg_list))
-		{
-			exec_builtin(command.arg_list, env);
-			dup2(saved_stdout, STDOUT_FILENO);
-			close(saved_stdout);
-		}
-		close(hdoc_pipes[i]);
+		separate_process(list, env, &command, &exec);
+		do_process(list, env, command, &exec);
+		close(exec.hdoc_pipes[exec.i]);
 		free(command.cmd);
 		command.cmd = NULL;
 		free(command.arg_list);
 		list = next_cmd(list);
-		i++;
+		exec.i++;
 	}
-	if (cmd_count > 1)
-		close(pipes_fd[1][RD_PIPE]);
+	if (exec.cmd_count > 1)
+		close(exec.pipes_fd[1][RD_PIPE]);
 	wait_children();
-	free(hdoc_pipes);
+	free(exec.hdoc_pipes);
 }
