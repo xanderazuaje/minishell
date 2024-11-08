@@ -92,11 +92,7 @@ void	set_append_outfile(t_cmdlist *list, char **env)
 
 void	set_hdoc(const int *hdoc_pipes, const int i)
 {
-	if (dup2(hdoc_pipes[i], STDIN_FILENO) < 0)
-	{
-		perror("here document");
-		return ;
-	}
+	dup2(hdoc_pipes[i], STDIN_FILENO);
 	close(hdoc_pipes[i]);
 }
 
