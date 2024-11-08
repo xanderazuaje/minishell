@@ -6,7 +6,7 @@
 /*   By: mhiguera <mhiguera@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 20:51:54 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/11/08 13:20:44 by mhiguera         ###   ########.fr       */
+/*   Updated: 2024/11/08 14:17:05 by mhiguera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@ void exit_error(char *str)
 void do_exit(char **args, char ***env)
 {
     int exit_status;
-    int i = 0;
+    int i;
 
+	i = 0;
     exit_status = prev_exit_status(0);
     if (args[1])
     {
@@ -35,10 +36,14 @@ void do_exit(char **args, char ***env)
             exit_error(args[1]);
             exit_status = 2;
         }
+		if (args[2])
+		{
+			write(2, "exit: too many arguments\n", 26);
+        	exit_status = 1;
+		}
         else
             exit_status = ft_atoi(args[1]) % 256;
     }
-	printf("HOLA SOY ARGS: %s\n", args[1]);
     freeenv(env);
     printf("esto exit: %d\n", exit_status);
     prev_exit_status(exit_status);
