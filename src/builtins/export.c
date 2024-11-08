@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
+/*   By: mhiguera <mhiguera@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 02:48:27 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/11/02 12:09:25 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2024/11/08 12:11:30 by mhiguera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
+//falla que tiene que tener un = si o si para poder exportarse
 void	export_error(char *str)
 {
 	write(2, "export: ", 8);
@@ -31,13 +32,16 @@ int	builtin_export(char *str, char ***env)
 	}
 	while (str[i] && str[i] != '=')
 	{
-		if (!ft_isalnum(str[i]) || !ft_isalpha(str[0]))
+		if ((!ft_isalnum(str[i]) && str[i] != '_') 
+		|| (!ft_isalpha(str[0]) && str[0] != '_'))
 		{
 			export_error(str);
 			return (1);
 		}
 		i++;
 	}
+	if (str[i] != '=')
+		return (0); //falta arreglar echo $?
 	insert_variable(str, env);
 	return (0);
 }
