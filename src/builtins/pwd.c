@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
+/*   By: mhiguera <mhiguera@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 20:51:54 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/11/02 12:09:56 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2024/11/08 10:08:22 by mhiguera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@ void	do_pwd(void)
 	char	*path;
 
 	path = getcwd(NULL, 0);
-	printf("%s\n", path);
+	if (path == NULL)
+		printf("unknown path\n");
+	else
+		printf("%s\n", path);
 	free(path);
 }
