@@ -6,7 +6,7 @@
 /*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 01:01:01 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/07/02 01:20:53 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2024/11/08 13:03:26 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	get_var_loc(char *str, char *save[2])
 		}
 		if (!quote && (str[i] == '"' || str[i] == '\''))
 			quote = str[i];
-		else if (quote && (str[i] == '"' || str[i] == '\''))
+		else if (quote && (str[i] == '"' || str[i] == '\'') && str[i] == quote)
 			quote = '\0';
 		i++;
 	}
