@@ -6,7 +6,7 @@
 /*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 23:48:35 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/11/03 10:24:34 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2024/11/08 14:03:51 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <fcntl.h>
 # include <sys/wait.h>
 # include "../minishell.h"
+# include "../parsing/expansor/_expansor.h"
 
 void		executor(t_cmdlist *list, char ***env);
 char		*expand_hdoc(char *str, char **env);
@@ -39,5 +40,8 @@ void		execute_it(char **env, char **arg_list, char *cmd);
 void		separate_process(t_cmdlist *list, char ***env, t_cmd *c, t_exec *e);
 char		**set_cmd_args(t_cmdlist *list, char **env, char **cmd);
 void		do_process(t_cmdlist *list, char ***env, t_cmd c, t_exec *e);
+void		set_infile(t_cmdlist *list, char **env);
+void		set_outfile(t_cmdlist *list, char **env);
+void		set_append_outfile(t_cmdlist *list, char **env);
 
 #endif

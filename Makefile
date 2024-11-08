@@ -22,6 +22,7 @@ SRC_FILES := $(SRC_DIR)/main.c \
 	$(SRC_DIR)/executor/expand_path.c \
 	$(SRC_DIR)/executor/here_doc.c \
 	$(SRC_DIR)/executor/pipes.c \
+	$(SRC_DIR)/executor/set_files.c \
 	$(SRC_DIR)/executor/set_redirections.c \
 	$(SRC_DIR)/feature_test/test_expansor.c \
 	$(SRC_DIR)/feature_test/test_splitted.c \
