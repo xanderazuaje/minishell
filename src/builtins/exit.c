@@ -3,32 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
+/*   By: mhiguera <mhiguera@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 20:51:54 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/11/02 12:07:23 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2024/11/08 13:20:44 by mhiguera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-void	do_exit(char **args, char ***env)
+void exit_error(char *str)
 {
-	int	exit_status;
-	int	status;
+    write(2, "exit: ", 6);
+    ft_putstr_fd(str, 2);
+    write(2, ": numeric argument required\n", 28);
+}
 
-	exit_status = prev_exit_status(0);
-	if (args[1] != NULL)
-	{
-		status = ft_atoi(args[1]);
-		if (status < 0)
-			exit_status = 179;
-		else if (status > 255)
-			exit_status = 244;
-		else
-			exit_status = status;
-	}
-	freeenv(env);
-	prev_exit_status(exit_status);
-	exit(exit_status);
+void do_exit(char **args, char ***env)
+{
+    int exit_status;
+    int i = 0;
+
+    exit_status = prev_exit_status(0);
+    if (args[1])
+    {
+        while (args[1][i] && (ft_isdigit(args[1][i]) || (i == 0 && args[1][i] == '-')))
+            i++;
+        
+        if (args[1][i] != '\0')
+        {
+            exit_error(args[1]);
+            exit_status = 2;
+        }
+        else
+            exit_status = ft_atoi(args[1]) % 256;
+    }
+	printf("HOLA SOY ARGS: %s\n", args[1]);
+    freeenv(env);
+    printf("esto exit: %d\n", exit_status);
+    prev_exit_status(exit_status);
+    exit(exit_status);
 }
