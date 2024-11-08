@@ -6,7 +6,7 @@
 /*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 15:21:38 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/11/03 10:16:10 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2024/11/08 12:38:26 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_states	check_states(const char *str, const t_states *prev, char *prev_q)
 {
 	t_states	curr;
 
-	if ((*str == '&' || *str == '\\' || *str == ';') && *prev != quotes)
+	if (*str == '\\' || ((*str == '&' || *str == ';') && *prev != quotes))
 		curr = error;
 	else if (*str == '<' || *str == '>')
 		curr = redirection;
@@ -82,7 +82,7 @@ int	check_input(char *str)
 		if (curr == error)
 		{
 			if (prev == quotes)
-				write(2, "syntax error: unclosed quote\n", 30);
+				write(2, "invalid syntax\n", 15);
 			else
 				syntax_error(*str);
 			return (0);
