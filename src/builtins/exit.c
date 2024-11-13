@@ -31,37 +31,34 @@ void	exit_error(char *str)
 	write(2, ": numeric argument required\n", 28);
 }
 
-void	check_valid_input(char **args, int *exit_status, int i)
+void	check_valid_input(char **args, int i)
 {
 	if (args[1][i] != '\0')
 	{
 		exit_error(args[1]);
-		*exit_status = 2;
+		g_exit_status = 2;
 	}
 	if (args[2])
 	{
 		write(2, "exit: too many arguments\n", 26);
-		*exit_status = 1;
+		g_exit_status = 1;
 	}
 	else
-		*exit_status = ft_atoi(args[1]) % 256;
+		g_exit_status = ft_atoi(args[1]) % 256;
 }
 
 void	do_exit(char **args, char ***env)
 {
-	int	exit_status;
 	int	i;
 
 	i = 0;
-	exit_status = prev_exit_status(0);
 	if (args[1])
 	{
 		while (args[1][i] && (ft_isdigit(args[1][i])
 			|| (i == 0 && args[1][i] == '-')))
 			i++;
-		check_valid_input(args, &exit_status, i);
+		check_valid_input(args, i);
 	}
 	freeenv(env);
-	prev_exit_status(exit_status);
-	exit(exit_status);
+	exit(g_exit_status);
 }

@@ -24,14 +24,14 @@
 
 #include "_expansor.h"
 
-char	*get_var_val(const char *str, char **env, int exit_status)
+char	*get_var_val(const char *str, char **env)
 {
 	char	*var;
 
 	if (!str)
 		return (NULL);
 	if (*(str + 1) == '?')
-		return (ft_itoa(exit_status));
+		return (ft_itoa(g_exit_status));
 	var = NULL;
 	while (*env && !start_with(*env, str + 1))
 		env++;

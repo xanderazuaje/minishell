@@ -16,7 +16,7 @@ t_cmdlist	*parse_str(char *str, char **env)
 {
 	if (!check_input(str))
 	{
-		prev_exit_status(2);
+		set_exit_status(2);
 		return (NULL);
 	}
 	return (expand(str, env));

@@ -6,7 +6,7 @@
 /*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 14:00:42 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/11/08 14:00:46 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2024/11/13 19:39:05 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	set_infile(t_cmdlist *list, char **env)
 	char	*file_name;
 	int		fd;
 
-	file_name = expand_var(list->next->word, env, prev_exit_status(0));
+	file_name = expand_var(list->next->word, env);
 	if (!file_name || ft_strrchr(file_name, ' ') != 0)
 	{
 		write(2, list->next->word, ft_strlen(list->next->word));
@@ -44,7 +44,7 @@ void	set_outfile(t_cmdlist *list, char **env)
 	int		fd;
 
 	var_name = ft_strdup(list->next->word);
-	file_name = expand_var(list->next->word, env, prev_exit_status(0));
+	file_name = expand_var(list->next->word, env);
 	if (!file_name || ft_strrchr(file_name, ' ') != 0)
 	{
 		write(2, var_name, ft_strlen(var_name));
@@ -70,7 +70,7 @@ void	set_append_outfile(t_cmdlist *list, char **env)
 	char	*file_name;
 	int		fd;
 
-	file_name = expand_var(list->next->word, env, prev_exit_status(0));
+	file_name = expand_var(list->next->word, env);
 	if (!file_name || ft_strrchr(file_name, ' ') != 0)
 	{
 		write(2, list->next->word, ft_strlen(list->next->word));

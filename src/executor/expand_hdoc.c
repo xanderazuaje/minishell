@@ -67,7 +67,7 @@ char	*expand_hdoc(char *str, char **env)
 			break ;
 		var_name = ft_substr(local[0], 0, len_to_ptr(local[0], local[1]));
 		temp = var_name;
-		var_val = get_var_val(var_name, env, prev_exit_status(0));
+		var_val = get_var_val(var_name, env);
 		free(temp);
 		last = insert_var(local, last, var_val);
 	}

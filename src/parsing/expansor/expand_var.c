@@ -55,7 +55,7 @@ char	*insert_var(char *const *local, char *last, char *var_val)
 	return (last);
 }
 
-char	*expand_var(char *str, char **env, int exit_status)
+char	*expand_var(char *str, char **env)
 {
 	char	*local[2];
 	char	*last;
@@ -74,7 +74,7 @@ char	*expand_var(char *str, char **env, int exit_status)
 			break ;
 		var_name = ft_substr(local[0], 0, len_to_ptr(local[0], local[1]));
 		temp = var_name;
-		var_val = get_var_val(var_name, env, exit_status);
+		var_val = get_var_val(var_name, env);
 		free(temp);
 		if (var_val && has_protected(var_val))
 			var_val = protect_char(var_val);

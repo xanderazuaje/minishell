@@ -30,7 +30,7 @@ void	wait_children(void)
 	while (waitpid(-1, &exit_status, 0) != -1)
 	{
 	}
-	prev_exit_status(exit_status);
+	set_exit_status(exit_status);
 }
 
 void	set_pipes(t_cmdlist *list, int i, int pipes_fd[2][2])

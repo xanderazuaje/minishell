@@ -36,7 +36,7 @@ t_cmdlist	*expand(char *input, char **env)
 	t_cmdlist	*node;
 	int			hdoc;
 
-	var_expanded = expand_var(input, env, prev_exit_status(0));
+	var_expanded = expand_var(input, env);
 	if (!var_expanded)
 		var_expanded = ft_strdup("");
 	splitted = split_sh(var_expanded);

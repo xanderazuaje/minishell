@@ -43,7 +43,7 @@ int	go_home(char **env)
 {
 	char	*home;
 
-	home = get_var_val("$HOME", env, 0);
+	home = get_var_val("$HOME", env);
 	if (!home)
 		return (perror("cd"), 1);
 	if (chdir(home) != 0)
