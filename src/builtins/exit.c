@@ -47,7 +47,7 @@ void	check_valid_input(char **args, int i)
 		g_exit_status = ft_atoi(args[1]) % 256;
 }
 
-void	do_exit(char **args, char ***env)
+int	do_exit(char **args, char ***env)
 {
 	int	i;
 
@@ -61,4 +61,5 @@ void	do_exit(char **args, char ***env)
 	}
 	freeenv(env);
 	exit(g_exit_status);
+	return (1);
 }

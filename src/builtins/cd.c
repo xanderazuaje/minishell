@@ -6,7 +6,7 @@
 /*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 12:25:43 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/11/08 12:41:37 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2024/11/16 19:47:52 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	go_there(char **args)
 	if (access(path, F_OK) != 0)
 	{
 		perror("cd");
-		return (1);
+		return (2);
 	}
 	if (chdir(path) != 0)
 		return (perror("cd"), 1);

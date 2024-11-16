@@ -6,14 +6,13 @@
 /*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 00:45:30 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/11/15 23:37:57 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2024/11/16 20:22:56 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "globals.h"
 
-void	prev_exit_status(int i)
+void	set_exit_status(int i)
 {
 	if (WIFSIGNALED(i))
 	{

@@ -3,6 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
+/*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/08 12:25:43 by xazuaje-          #+#    #+#             */
+/*   Updated: 2024/11/16 19:02:51 by xazuaje-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pwd.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
 /*   By: mhiguera <mhiguera@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 20:51:54 by xazuaje-          #+#    #+#             */
@@ -12,14 +24,17 @@
 
 #include "builtins.h"
 
-void	do_pwd(void)
+int	do_pwd(void)
 {
 	char	*path;
 
 	path = getcwd(NULL, 0);
 	if (path == NULL)
+	{
 		printf("unknown path\n");
-	else
-		printf("%s\n", path);
+		return (1);
+	}
+	printf("%s\n", path);
 	free(path);
+	return (0);
 }

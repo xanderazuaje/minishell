@@ -1,31 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals.c                                          :+:      :+:    :+:   */
+/*   get_first_command.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/30 20:51:54 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/11/02 12:40:12 by xazuaje-         ###   ########.fr       */
+/*   Created: 2024/11/16 20:19:26 by xazuaje-          #+#    #+#             */
+/*   Updated: 2024/11/16 20:19:59 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-#include <readline/readline.h>
-#include <readline/history.h>
+#include "_executor.h"
 
-void	sigint_handler(int sig)
+char	*get_first_command(t_cmdlist *list)
 {
-	g_exit_status = 130;
-	printf("\n");
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
-	(void) sig;
-}
-
-void	init_signals(void)
-{
-	signal(SIGINT, sigint_handler);
-	signal(SIGQUIT, SIG_IGN);
+	while (list)
+	{
+		if (list->flags == command)
+			return (list->word);
+		list = list->next;
+	}
+	return (NULL);
 }

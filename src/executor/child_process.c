@@ -17,9 +17,11 @@ void	child_process(t_cmdlist *list, char ***env, t_cmd c, t_exec *e)
 	set_pipes(list, e->i, e->pipes_fd);
 	set_redirections(list, e->hdoc_pipes, e->i, *env);
 	if (is_builtin(c.arg_list))
-		exec_builtin(c.arg_list, env);
-	else
-		execute_it(*env, c.arg_list, c.cmd);
+	{
+		g_exit_status = exec_builtin(c.arg_list, env);
+		exit(g_exit_status);
+	}
+	execute_it(*env, c.arg_list, c.cmd);
 	exit(1);
 }
 
@@ -54,7 +56,7 @@ void	do_process(t_cmdlist *list, char ***env, t_cmd c, t_exec *e)
 		pipe_cmd(list, env, c, e);
 	else if (is_builtin(c.arg_list))
 	{
-		exec_builtin(c.arg_list, env);
+		g_exit_status = exec_builtin(c.arg_list, env);
 		dup2(e->saved_stdout, STDOUT_FILENO);
 		close(e->saved_stdout);
 	}

@@ -6,7 +6,7 @@
 /*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 23:48:35 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/11/08 14:03:51 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2024/11/16 20:20:34 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,6 @@ void		do_process(t_cmdlist *list, char ***env, t_cmd c, t_exec *e);
 void		set_infile(t_cmdlist *list, char **env);
 void		set_outfile(t_cmdlist *list, char **env);
 void		set_append_outfile(t_cmdlist *list, char **env);
+char		*get_first_command(t_cmdlist *list);
 
 #endif

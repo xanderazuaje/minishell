@@ -20,6 +20,7 @@ SRC_FILES := $(SRC_DIR)/main.c \
 	$(SRC_DIR)/executor/executor.c \
 	$(SRC_DIR)/executor/expand_hdoc.c \
 	$(SRC_DIR)/executor/expand_path.c \
+	$(SRC_DIR)/executor/get_first_command.c \
 	$(SRC_DIR)/executor/here_doc.c \
 	$(SRC_DIR)/executor/pipes.c \
 	$(SRC_DIR)/executor/set_files.c \
@@ -95,7 +96,7 @@ rebonus: fclean bonus
 
 # Build rule
 $(TARGET): $(OBJ_FILES)
-	$(CC) $(CFLAGS) $(LDFLAGS) $^ -o $@ $(LIBS)
+	mold -run $(CC) $(CFLAGS) $(LDFLAGS) $^ -o $@ $(LIBS)
 # Object file rule
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(@D)
