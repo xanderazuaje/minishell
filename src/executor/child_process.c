@@ -6,7 +6,7 @@
 /*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 10:17:21 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/11/08 13:27:32 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2024/11/19 20:48:53 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,15 @@
 void	child_process(t_cmdlist *list, char ***env, t_cmd c, t_exec *e)
 {
 	set_pipes(list, e->i, e->pipes_fd);
-	set_redirections(list, e->hdoc_pipes, e->i, *env);
-	if (is_builtin(c.arg_list))
+	if (set_redirections(list, e->hdoc_pipes, e->i, *env))
 	{
-		g_exit_status = exec_builtin(c.arg_list, env);
-		exit(g_exit_status);
+		if (is_builtin(c.arg_list))
+		{
+			g_exit_status = exec_builtin(c.arg_list, env);
+			exit(g_exit_status);
+		}
+		execute_it(*env, c.arg_list, c.cmd);
 	}
-	execute_it(*env, c.arg_list, c.cmd);
 	exit(1);
 }
 
