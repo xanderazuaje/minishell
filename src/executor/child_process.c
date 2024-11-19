@@ -39,7 +39,7 @@ void	pipe_cmd(t_cmdlist *list, char ***env, t_cmd c, t_exec *e)
 	}
 }
 
-void	separate_process(t_cmdlist *list, char ***env, t_cmd *c,
+int	separate_process(t_cmdlist *list, char ***env, t_cmd *c,
 	t_exec *e)
 {
 	if (next_cmd(list))
@@ -49,7 +49,9 @@ void	separate_process(t_cmdlist *list, char ***env, t_cmd *c,
 	{
 		e->saved_stdout = dup(STDOUT_FILENO);
 		set_redirections(list, e->hdoc_pipes, e->i, *env);
+		return (0);
 	}
+	return (1);
 }
 
 void	do_process(t_cmdlist *list, char ***env, t_cmd c, t_exec *e)

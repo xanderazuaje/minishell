@@ -6,7 +6,7 @@
 /*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 23:48:35 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/11/19 20:46:07 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2024/11/19 21:51:29 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int			is_builtin(char **arg_list);
 void		child_process(t_cmdlist *list, char ***env, t_cmd c, t_exec *e);
 void		pipe_cmd(t_cmdlist *list, char ***env, t_cmd c, t_exec *e);
 void		execute_it(char **env, char **arg_list, char *cmd);
-void		separate_process(t_cmdlist *list, char ***env, t_cmd *c, t_exec *e);
+int			separate_process(t_cmdlist *list, char ***env, t_cmd *c, t_exec *e);
 char		**set_cmd_args(t_cmdlist *list, char **env, char **cmd);
 void		do_process(t_cmdlist *list, char ***env, t_cmd c, t_exec *e);
 int			set_infile(t_cmdlist *list, char **env);

@@ -103,8 +103,8 @@ void	executor(t_cmdlist *list, char ***env)
 	first_command = get_first_command(list);
 	while (list)
 	{
-		separate_process(list, env, &command, &exec);
-		do_process(list, env, command, &exec);
+		if (separate_process(list, env, &command, &exec))
+			do_process(list, env, command, &exec);
 		close(exec.hdoc_pipes[exec.i]);
 		free(command.cmd);
 		command.cmd = NULL;
