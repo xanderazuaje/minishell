@@ -48,8 +48,8 @@ int	separate_process(t_cmdlist *list, char ***env, t_cmd *c,
 	if (e->cmd_count == 1 && is_builtin(c->arg_list))
 	{
 		e->saved_stdout = dup(STDOUT_FILENO);
-		set_redirections(list, e->hdoc_pipes, e->i, *env);
-		return (0);
+		if (!set_redirections(list, e->hdoc_pipes, e->i, *env))
+			return (0);
 	}
 	return (1);
 }

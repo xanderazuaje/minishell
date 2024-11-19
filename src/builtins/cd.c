@@ -56,5 +56,10 @@ int	do_cd(char **args, char **env)
 {
 	if (args[1] == NULL)
 		return (go_home(env));
+	if (args[2] != NULL)
+	{
+		write(2, "cd: too many arguments\n", 23);
+		return (1);
+	}
 	return (go_there(args));
 }
