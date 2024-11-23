@@ -19,8 +19,11 @@
 # define QUOT 3
 # define ENDQ 4
 # define PIPE 5
-# define REDI 6
-# define LAST 7
+# define IRED 6
+# define IRDD 7
+# define ORED 8
+# define ORDD 9
+# define LAST 10
 
 typedef enum e_states
 {
@@ -30,7 +33,10 @@ typedef enum e_states
 	quotes = QUOT,
 	end_of_quote = ENDQ,
 	pipes = PIPE,
-	redirection = REDI,
+	redirection_in = IRED,
+	redirection_in_double = IRDD,
+	redirection_out =ORED,
+	redirection_out_double = ORDD,
 	last = LAST
 }	t_states;
 

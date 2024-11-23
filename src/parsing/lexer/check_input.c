@@ -6,7 +6,7 @@
 /*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 15:21:38 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/11/08 12:38:26 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2024/11/23 17:21:25 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,18 +44,34 @@ void	check_quotes_state(const char *s, const t_states *p, char *pq,
 	}
 }
 
+void	set_redirs(const char *str, const t_states *prev, t_states *curr)
+{
+	if (*str == '<')
+	{
+		if (*prev == redirection_in || *prev == redirection_in_double)
+			*curr = redirection_in_double;
+		else
+			*curr = redirection_in;
+	}
+	else
+	{
+		if (*prev == redirection_out || *prev == redirection_out_double)
+			*curr = redirection_out_double;
+		else
+			*curr = redirection_out;
+	}
+}
+
 t_states	check_states(const char *str, const t_states *prev, char *prev_q)
 {
 	t_states	curr;
 
 	if (*str == '\\' || ((*str == '&' || *str == ';') && *prev != quotes))
 		curr = error;
-	else if (*str == '<' || *str == '>')
-		curr = redirection;
+	if (*str == '<' || *str == '>')
+		set_redirs(str, prev, &curr);
 	else if (*str == '"' || *str == '\'')
-	{
 		check_quotes_state(str, prev, prev_q, &curr);
-	}
 	else if (*str == '|')
 		curr = pipes;
 	else if (*str == '\0')
