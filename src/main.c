@@ -6,7 +6,7 @@
 /*   By: xazuaje- <xazuaje-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 20:51:54 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/11/13 19:57:42 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2024/11/23 13:09:05 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,14 @@
 
 int		g_exit_status = 0;
 
+void	set_line(char **line)
+{
+	if (isatty(STDIN_FILENO))
+		*line = readline("\033[0;33mbASSh> \033[0;0m");
+	else
+		*line = readline("");
+}
+
 int	main(int argc, char **argv, char **env)
 {
 	char		*line;
@@ -38,10 +46,7 @@ int	main(int argc, char **argv, char **env)
 	init_signals();
 	while (1)
 	{
-		if (isatty(STDIN_FILENO))
-			line = readline("\033[0;33mbASSh> \033[0;0m");
-		else
-			line = readline("");
+		set_line(&line);
 		if (line && *line)
 			add_history(line);
 		if (!line)
