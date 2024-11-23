@@ -40,7 +40,7 @@ void		execute_it(char **env, char **arg_list, char *cmd);
 int			separate_process(t_cmdlist *list, char ***env, t_cmd *c, t_exec *e);
 char		**set_cmd_args(t_cmdlist *list, char **env, char **cmd);
 void		do_process(t_cmdlist *list, char ***env, t_cmd c, t_exec *e);
-int			set_infile(t_cmdlist *list, char **env);
+int			set_infile(t_cmdlist *list, char **env, char *lts_cmd);
 int			set_outfile(t_cmdlist *list, char **env);
 int			set_append_outfile(t_cmdlist *list, char **env);
 char		*get_first_command(t_cmdlist *list);

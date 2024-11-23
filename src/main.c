@@ -38,7 +38,10 @@ int	main(int argc, char **argv, char **env)
 	init_signals();
 	while (1)
 	{
-		line = readline("\033[0;33mbASSh> \033[0;0m");
+		if (isatty(STDIN_FILENO))
+			line = readline("\033[0;33mbASSh> \033[0;0m");
+		else
+			line = readline("");
 		if (line && *line)
 			add_history(line);
 		if (!line)

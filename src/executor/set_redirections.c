@@ -49,7 +49,7 @@ int	set_redirections(t_cmdlist *l, const int *hdp, const int i, char **env)
 		if (l->flags == command)
 			lts_cmd = l->word;
 		if (l->flags == infile)
-			status = set_infile(l, env);
+			status = set_infile(l, env, lts_cmd);
 		else if (l->flags == here_document)
 			set_child_hdoc(hdp, i, lts_cmd);
 		else if (l->flags == outfile)

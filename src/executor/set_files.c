@@ -12,11 +12,13 @@
 
 #include "_executor.h"
 
-int	set_infile(t_cmdlist *list, char **env)
+int	set_infile(t_cmdlist *list, char **env, char *lts_cmd)
 {
 	char	*file_name;
 	int		fd;
 
+	if (is_builtin(&lts_cmd))
+		return (1);
 	file_name = expand_var(list->next->word, env);
 	if (!file_name || ft_strrchr(file_name, ' ') != 0)
 	{
