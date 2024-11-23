@@ -1,6 +1,6 @@
 # Compiler and flags
 CC := gcc
-CFLAGS := -Wall -Wextra -Werror -g3 -fsanitize=address,undefined
+CFLAGS := -Wall -Wextra -Werror
 
 # Flags para readline
 LDFLAGS += -L/opt/homebrew/opt/readline/lib
@@ -96,7 +96,7 @@ rebonus: fclean bonus
 
 # Build rule
 $(TARGET): $(OBJ_FILES)
-	mold -run $(CC) $(CFLAGS) $(LDFLAGS) $^ -o $@ $(LIBS)
+	$(CC) $(CFLAGS) $(LDFLAGS) $^ -o $@ $(LIBS)
 # Object file rule
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(@D)
